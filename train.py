@@ -39,7 +39,7 @@ if __name__ == "__main__":
         "--model",
         type=str,
         help="the available models to train",
-        default="nade",
+        default="pixel_snail",
         choices=list(MODEL_DICT.keys()),
     )
     parser.add_argument(
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         "--log-dir",
         type=str,
         help="the directory where to log data",
-        default="/tmp/run",
+        default="./tmp/run",
     )
     parser.add_argument("--use-cuda", help="whether to use CUDA", action="store_true")
     args = parser.parse_args()
