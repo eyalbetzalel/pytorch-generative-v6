@@ -267,7 +267,7 @@ def reproduce(
     # )
 
     model = models.PixelSNAIL(
-        in_channels=1,
+        in_channels=3,
         out_channels=512,
         n_channels=64,
         n_pixel_snail_blocks=8,
