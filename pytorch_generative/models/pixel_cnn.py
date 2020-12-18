@@ -139,6 +139,20 @@ def reproduce(
     from pytorch_generative import trainer
     from pytorch_generative import models
 
+
+    ####################################################################################################################
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Load ImageGPT Data :
+
+    import gmpm
+    import ipdb; ipdb.set_trace()
+
+    train = gmpm.train
+    test = gmpm.test
+
+    ####################################################################################################################
+
+
     transform = transforms.Compose(
         [transforms.ToTensor(), lambda x: distributions.Bernoulli(probs=x).sample()]
     )
