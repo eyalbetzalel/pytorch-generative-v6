@@ -1,5 +1,3 @@
-import tensorflow as tf
-import gin
 import h5py
 import numpy as np
 import os
@@ -36,9 +34,8 @@ def load_h5_dataset(directory):
     return train, test
 
 def clusters_to_images(samples, pathToCluster):
-    # clusters = np.load(pathToCluster)
-    # samples = [np.reshape(np.rint(127.5 * (clusters[s.astype(int).tolist()] + 1.0)), [32, 32, 3]).astype(np.float32) for s in samples]
-    samples = [np.reshape(s, [32, 32, 1]).astype(np.float32) for s in samples]
+    clusters = np.load(pathToCluster)
+    samples = [np.reshape(np.rint(127.5 * (clusters[s.astype(int).tolist()] + 1.0)), [32, 32, 3]).astype(np.float32) for s in samples]
     return samples
 
 directory = "./"
