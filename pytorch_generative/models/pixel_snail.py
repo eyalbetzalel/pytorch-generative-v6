@@ -24,6 +24,7 @@ from torch.nn import functional as F
 from pytorch_generative import nn as pg_nn
 from pytorch_generative.models import base
 
+import numpy as np
 
 def _elu_conv_elu(conv, x):
     return F.elu(conv(F.elu(x)))
