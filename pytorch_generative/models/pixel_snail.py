@@ -184,15 +184,17 @@ class PixelSNAIL(base.AutoregressiveModel):
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Mapping function from 1-ch cluster to 3-ch RGB images :
 
-    def clusters_to_images(x):
-        pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
-        clusters = torch.from_numpy(np.load(pathToCluster)).float().to(device)
-        samples = torch.reshape(torch.round(127.5 * (clusters[x] + 1.0)), [32, 32, 3])
-        return samples
+
 
     ####################################################################################################################
 
     def forward(self, x):
+
+        def clusters_to_images(x):
+            pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
+            clusters = torch.from_numpy(np.load(pathToCluster)).float().to(device)
+            samples = torch.reshape(torch.round(127.5 * (clusters[x] + 1.0)), [32, 32, 3])
+            return samples
 
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -244,7 +246,6 @@ def reproduce(
     # Load ImageGPT Data :
 
     import gmpm
-    import ipdb; ipdb.set_trace()
 
     train = gmpm.train
     test = gmpm.test

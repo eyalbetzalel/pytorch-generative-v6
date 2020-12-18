@@ -22,7 +22,6 @@ def load_h5_dataset(directory):
             continue
         else:
             continue
-    import ipdb; ipdb.set_trace()
     data_flat = [item for sublist in data for item in sublist]
     data_flat = np.stack(data_flat, axis=0)
     precent_train_test_split = 0.7
