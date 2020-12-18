@@ -265,9 +265,6 @@ def reproduce(
         num_workers=8,
     )
 
-    directory = "./"
-    train, test = load_h5_dataset(directory)
-
     ####################################################################################################################
 
     # transform = transforms.Compose(

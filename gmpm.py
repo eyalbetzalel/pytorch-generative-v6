@@ -42,6 +42,6 @@ directory = "./"
 
 train, test = load_h5_dataset(directory)
 
-pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
-train = clusters_to_images(train, pathToCluster)
-test = clusters_to_images(test, pathToCluster)
+# pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
+# train = clusters_to_images(train, pathToCluster)
+# test = clusters_to_images(test, pathToCluster)
