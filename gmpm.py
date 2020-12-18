@@ -38,7 +38,7 @@ def clusters_to_images(samples, pathToCluster):
     samples = [np.reshape(np.rint(127.5 * (clusters[s.astype(int).tolist()] + 1.0)), [32, 32, 3]).astype(np.float32) for s in samples]
     return samples
 
-directory = "/home/dsi/eyalbetzalel/image-gpt/raw_dataset_h5/"
+directory = "./dataset/raw_dataset_h5/"
 
 train, test = load_h5_dataset(directory)
 
