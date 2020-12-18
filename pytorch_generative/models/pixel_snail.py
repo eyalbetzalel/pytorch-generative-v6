@@ -28,7 +28,7 @@ import numpy as np
 
 pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
 global clusters
-clusters = torch.from_numpy(np.load(pathToCluster)).float().to(device)
+clusters = torch.from_numpy(np.load(pathToCluster)).float()
 
 def _elu_conv_elu(conv, x):
     return F.elu(conv(F.elu(x)))
