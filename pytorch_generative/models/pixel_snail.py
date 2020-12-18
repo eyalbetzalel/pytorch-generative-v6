@@ -180,12 +180,40 @@ class PixelSNAIL(base.AutoregressiveModel):
             ),
         )
 
+    ####################################################################################################################
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Mapping function from 1-ch cluster to 3-ch RGB images :
+
+    def clusters_to_images(x):
+        pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
+        clusters = torch.from_numpy(np.load(pathToCluster)).float().to(device)
+        samples = torch.reshape(torch.round(127.5 * (clusters[x] + 1.0)), [32, 32, 3])
+        return samples
+
+    ####################################################################################################################
+
     def forward(self, x):
+
+        ####################################################################################################################
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # First layer of the network is mapping function :
+
+        import ipdb; ipdb.set_trace();
+        x = clusters_to_images(x)
+
+        ####################################################################################################################
+
         input_img = x
         x = self._input(x)
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
         return self._output(x)
+
+    def clusters_to_images(x):
+        pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
+        clusters = torch.from_numpy(np.load(pathToCluster)).float().to(device)
+        samples = torch.reshape(torch.round(127.5 * (clusters[x] + 1.0)), [32, 32, 3])
+        return samples
 
 
 def reproduce(
@@ -225,26 +253,41 @@ def reproduce(
     train = gmpm.train
     test = gmpm.test
 
-    ####################################################################################################################
-
-    transform = transforms.Compose(
-        [transforms.ToTensor(), lambda x: distributions.Bernoulli(probs=x).sample()]
-    )
-    train_loader = debug_loader or data.DataLoader(
-        datasets.MNIST("/tmp/data", train=True, download=True, transform=transform),
+    train_loader = data.DataLoader(
+        data.TensorDataset(torch.Tensor(train)),
         batch_size=batch_size,
         shuffle=True,
         num_workers=8,
     )
-    test_loader = debug_loader or data.DataLoader(
-        datasets.MNIST("/tmp/data", train=False, download=True, transform=transform),
+    test_loader = data.DataLoader(
+        data.TensorDataset(torch.Tensor(test)),
         batch_size=batch_size,
         num_workers=8,
     )
 
+    directory = "./"
+    train, test = load_h5_dataset(directory)
+
+    ####################################################################################################################
+
+    # transform = transforms.Compose(
+    #     [transforms.ToTensor(), lambda x: distributions.Bernoulli(probs=x).sample()]
+    # )
+    # train_loader = debug_loader or data.DataLoader(
+    #     datasets.MNIST("/tmp/data", train=True, download=True, transform=transform),
+    #     batch_size=batch_size,
+    #     shuffle=True,
+    #     num_workers=8,
+    # )
+    # test_loader = debug_loader or data.DataLoader(
+    #     datasets.MNIST("/tmp/data", train=False, download=True, transform=transform),
+    #     batch_size=batch_size,
+    #     num_workers=8,
+    # )
+
     model = models.PixelSNAIL(
         in_channels=1,
-        out_channels=1,
+        out_channels=512,
         n_channels=64,
         n_pixel_snail_blocks=8,
         n_residual_blocks=2,
