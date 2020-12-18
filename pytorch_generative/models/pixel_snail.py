@@ -254,13 +254,13 @@ def reproduce(
     test = gmpm.test
 
     train_loader = data.DataLoader(
-        data.TensorDataset(torch.Tensor(train)),
+        data.TensorDataset(torch.Tensor(train),torch.rand(len(train))),
         batch_size=batch_size,
         shuffle=True,
         num_workers=8,
     )
     test_loader = data.DataLoader(
-        data.TensorDataset(torch.Tensor(test)),
+        data.TensorDataset(torch.Tensor(test),torch.rand(len(test))),
         batch_size=batch_size,
         num_workers=8,
     )
