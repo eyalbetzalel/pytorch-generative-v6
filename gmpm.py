@@ -18,7 +18,7 @@ def load_h5_dataset(directory):
                 temp = list(f[a_group_key])
                 data.append(temp[1:])
 
-                flagOneFile = 1
+                flagOneFile = 0
             continue
         else:
             continue
