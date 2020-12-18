@@ -183,6 +183,7 @@ class PixelSNAIL(base.AutoregressiveModel):
             nn.Conv2d(
                 in_channels=n_channels // 2, out_channels=out_channels, kernel_size=1
             ),
+
         )
 
     def forward(self, x):
@@ -199,14 +200,6 @@ class PixelSNAIL(base.AutoregressiveModel):
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
             x = self._output(x)
-
-            ####################################################################################################################
-            # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-            x = torch.reshape(x,[512,-1])
-            x = F.softmax(x,dim=1)
-
-            ####################################################################################################################
         return x
 
 def reproduce(
