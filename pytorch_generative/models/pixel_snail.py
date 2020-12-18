@@ -198,7 +198,16 @@ class PixelSNAIL(base.AutoregressiveModel):
         x = self._input(x)
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
-        return self._output(x)
+            x = self._output(x)
+
+            ####################################################################################################################
+            # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+            x = torch.reshape(x,[512,-1])
+            x = nn.softmax(x,dim=1)
+
+            ####################################################################################################################
+        return x
 
 def reproduce(
     n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None
@@ -267,7 +276,7 @@ def reproduce(
 
     model = models.PixelSNAIL(
         in_channels=3,
-        out_channels=512,
+        out_channels=1,
         n_channels=64,
         n_pixel_snail_blocks=8,
         n_residual_blocks=2,
