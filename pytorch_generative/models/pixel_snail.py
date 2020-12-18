@@ -26,6 +26,10 @@ from pytorch_generative.models import base
 
 import numpy as np
 
+pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
+global clusters
+clusters = torch.from_numpy(np.load(pathToCluster)).float().to(device)
+
 def _elu_conv_elu(conv, x):
     return F.elu(conv(F.elu(x)))
 
@@ -181,39 +185,20 @@ class PixelSNAIL(base.AutoregressiveModel):
             ),
         )
 
-    ####################################################################################################################
-    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # Mapping function from 1-ch cluster to 3-ch RGB images :
-
-
-
-    ####################################################################################################################
-
     def forward(self, x):
-
-        def clusters_to_images(x):
-            pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
-            clusters = torch.from_numpy(np.load(pathToCluster)).float().to(device)
-            samples = torch.reshape(torch.round(127.5 * (clusters[x] + 1.0)), [32, 32, 3])
-            return samples
 
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # First layer of the network is mapping function :
-
-        import ipdb; ipdb.set_trace();
-        x = clusters_to_images(x)
-
+        # Mapping function from 1-ch cluster to 3-ch RGB images :
+        x = torch.reshape(torch.round(127.5 * (clusters[x] + 1.0)), [32, 32, 3])
         ####################################################################################################################
+
 
         input_img = x
         x = self._input(x)
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
         return self._output(x)
-
-
-
 
 def reproduce(
     n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None
