@@ -191,7 +191,7 @@ class PixelSNAIL(base.AutoregressiveModel):
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Mapping function from 1-ch cluster to 3-ch RGB images :
         import ipdb; ipdb.set_trace()
-        # x = torch.reshape(torch.round(127.5 * (clusters[x.long()] + 1.0)), [x.shape[0] ,32, 32, 3])
+        x = torch.reshape(torch.round(127.5 * (clusters[x.long()] + 1.0)), [x.shape[0] ,3, 32, 32])
         ####################################################################################################################
 
 
@@ -251,24 +251,24 @@ def reproduce(
 
     ####################################################################################################################
 
-    transform = transforms.Compose(
-        [transforms.ToTensor(), lambda x: distributions.Bernoulli(probs=x).sample()]
-    )
-    train_loader = debug_loader or data.DataLoader(
-        datasets.MNIST("/tmp/data", train=True, download=True, transform=transform),
-        batch_size=batch_size,
-        shuffle=True,
-        num_workers=8,
-    )
-    test_loader = debug_loader or data.DataLoader(
-        datasets.MNIST("/tmp/data", train=False, download=True, transform=transform),
-        batch_size=batch_size,
-        num_workers=8,
-    )
+    # transform = transforms.Compose(
+    #     [transforms.ToTensor(), lambda x: distributions.Bernoulli(probs=x).sample()]
+    # )
+    # train_loader = debug_loader or data.DataLoader(
+    #     datasets.MNIST("/tmp/data", train=True, download=True, transform=transform),
+    #     batch_size=batch_size,
+    #     shuffle=True,
+    #     num_workers=8,
+    # )
+    # test_loader = debug_loader or data.DataLoader(
+    #     datasets.MNIST("/tmp/data", train=False, download=True, transform=transform),
+    #     batch_size=batch_size,
+    #     num_workers=8,
+    # )
 
     model = models.PixelSNAIL(
-        in_channels=1,
-        out_channels=1,
+        in_channels=3,
+        out_channels=512,
         n_channels=64,
         n_pixel_snail_blocks=8,
         n_residual_blocks=2,
