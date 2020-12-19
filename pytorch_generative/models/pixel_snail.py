@@ -190,7 +190,7 @@ class PixelSNAIL(base.AutoregressiveModel):
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Mapping function from 1-ch cluster to 3-ch RGB images :
-        x = torch.reshape(torch.round(127.5 * (clusters[x.long()] + 1.0)), [x.shape[0] ,3, 32, 32]).to(device)
+        x = torch.reshape(torch.round(127.5 * (clusters[x.long()] + 1.0)), [x.shape[0] ,3, 32, 32])
         ####################################################################################################################
 
 
@@ -236,6 +236,8 @@ def reproduce(
 
     train = gmpm.train
     test = gmpm.test
+
+    train, test = train.to(device), test.to(device)
 
     train_loader = data.DataLoader(
         data.TensorDataset(torch.Tensor(train),torch.rand(len(train))),
