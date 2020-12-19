@@ -279,7 +279,10 @@ def reproduce(
     scheduler = lr_scheduler.MultiplicativeLR(optimizer, lr_lambda=lambda _: 0.999977)
 
     def loss_fn(x, _, preds):
+
+        print("loss..")
         x = x.long()
+        print("loss finisih..")
         criterion = nn.CrossEntropyLoss()
         B, C, D = preds.size()
         preds_2d = preds.view(B, C, D, -1)
