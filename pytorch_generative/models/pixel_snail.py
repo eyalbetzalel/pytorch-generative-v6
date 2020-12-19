@@ -280,9 +280,10 @@ def reproduce(
     def loss_fn(x, _, preds):
         batch_size = x.shape[0]
         x, preds = x.view((batch_size, -1)), preds.view((batch_size, -1))
-        import ipdb;ipdb.set_trace()
-        loss = F.binary_cross_entropy_with_logits(preds, x, reduction="none")
-        return loss.sum(dim=1).mean()
+        loss = torch.nn.CrossEntropyLoss()
+        output = loss(x,preds)
+        import ipdb; ipdb.set_trace()
+        return output
 
     trainer = trainer.Trainer(
         model=model,
