@@ -29,7 +29,7 @@ class Trainer:
         sample_fn=None,
         lr_scheduler=None,
         log_dir=None,
-        device="cpu",
+        device="cuda",
     ):
         """Initializes a new Trainer instance.
 
