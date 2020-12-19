@@ -237,7 +237,6 @@ def reproduce(
     train = gmpm.train
     test = gmpm.test
 
-    train, test = train.to(device), test.to(device)
 
     train_loader = data.DataLoader(
         data.TensorDataset(torch.Tensor(train),torch.rand(len(train))),
