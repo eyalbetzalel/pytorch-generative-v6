@@ -175,7 +175,7 @@ class Trainer:
             loss = self._get_loss_dict(self.eval_one_batch(x, y))
             return {k: v.item() for k, v in loss.items()}
 
-    def interleaved_train_and_eval(self, n_epochs):
+    def interleaved_train_and_eval(self, n_epochs,device):
         """Trains and evaluates (after each epoch) for n_epochs."""
 
         for epoch in range(n_epochs):

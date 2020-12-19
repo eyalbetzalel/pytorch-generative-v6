@@ -299,4 +299,4 @@ def reproduce(
         log_dir=log_dir,
         device=device,
     )
-    trainer.interleaved_train_and_eval(n_epochs)
+    trainer.interleaved_train_and_eval(n_epochs,device)
