@@ -281,8 +281,10 @@ def reproduce(
         batch_size = x.shape[0]
         x, preds = x.view((batch_size, -1)), preds.view((batch_size, -1))
         loss = torch.nn.CrossEntropyLoss()
+        import ipdb;
+        ipdb.set_trace()
         output = loss(x,preds)
-        import ipdb; ipdb.set_trace()
+
         return output
 
     trainer = trainer.Trainer(
