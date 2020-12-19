@@ -193,9 +193,10 @@ class PixelSNAIL(base.AutoregressiveModel):
         x = torch.reshape(torch.round(127.5 * (clusters[x.long()] + 1.0)), [x.shape[0] ,3, 32, 32])
         ####################################################################################################################
 
-        x.to('cuda')
+
         input_img = x
         x = self._input(x)
+        x.to('cuda')
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
             output = self._output(x)
