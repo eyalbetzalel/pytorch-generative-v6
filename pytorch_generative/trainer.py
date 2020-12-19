@@ -59,7 +59,7 @@ class Trainer:
         """
         # Stateful objects that need to be saved.
         import ipdb; ipdb.set_trace()
-        self._model = model.to(device)
+
         self._optimizer = optimizer
         self._lr_scheduler = lr_scheduler
 
@@ -69,7 +69,7 @@ class Trainer:
         self._log_dir = log_dir or tempfile.mkdtemp()
         self._save_checkpoint_epochs = save_checkpoint_epochs
         self._device = torch.device(device) if isinstance(device, str) else device
-
+        self._model = model.to(self._device)
         self._sample_epochs = sample_epochs
         self._sample_fn = sample_fn
         if self._sample_epochs:

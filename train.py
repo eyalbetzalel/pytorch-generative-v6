@@ -28,9 +28,7 @@ MODEL_DICT = {
 
 
 def main(args):
-    import ipdb; ipdb.set_trace()
-    device = "cpu"
-    device = torch.device(device) if isinstance(device, str) else device
+    device = "cuda" if args.use_cuda else "cpu"
     MODEL_DICT[args.model].reproduce(
         args.n_epochs, args.batch_size, args.log_dir, device
     )
