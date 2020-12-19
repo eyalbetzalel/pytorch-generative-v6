@@ -181,7 +181,7 @@ class Trainer:
         for epoch in range(n_epochs):
             start_time = time.time()
 
-            print ("epoch " + str(epoch) + "out of " + str(n_epochs))
+            print ("epoch " + str(epoch) + " out of " + str(n_epochs))
 
             # Train.
             for i, batch in enumerate(self._train_loader):
@@ -194,6 +194,8 @@ class Trainer:
                 }
                 self._summary_writer.add_scalars("loss/lr", lrs, self._step)
                 loss = self._train_one_batch(x, y)
+                print("loss value: " + str(loss))
+                print("-------------------------------------------------------")
                 self._log_loss_dict(loss, training=True)
 
                 self._time_taken += time.time() - start_time

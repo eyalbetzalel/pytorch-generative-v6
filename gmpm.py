@@ -32,15 +32,6 @@ def load_h5_dataset(directory):
 
     return train, test
 
-def clusters_to_images(samples, pathToCluster):
-    clusters = np.load(pathToCluster)
-    samples = [np.reshape(np.rint(127.5 * (clusters[s.astype(int).tolist()] + 1.0)), [32, 32, 3]).astype(np.float32) for s in samples]
-    return samples
-
 directory = "./"
 
 train, test = load_h5_dataset(directory)
-
-# pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
-# train = clusters_to_images(train, pathToCluster)
-# test = clusters_to_images(test, pathToCluster)
