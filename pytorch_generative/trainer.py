@@ -186,8 +186,9 @@ class Trainer:
             # Train.
             for i, batch in enumerate(self._train_loader):
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+                batch = batch.to(device)
+                import ipdb; ipdb.set_trace()
                 x, y = batch
-                x = x.to(device)
                 self._examples_processed += x.shape[0]
                 lrs = {
                     f"group_{i}": param["lr"]
