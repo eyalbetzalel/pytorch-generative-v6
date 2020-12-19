@@ -186,9 +186,10 @@ class Trainer:
             # Train.
             for i, batch in enumerate(self._train_loader):
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                batch = batch.to(device)
-                import ipdb; ipdb.set_trace()
                 x, y = batch
+                x, y = x.to(device), y.to(device)
+                import ipdb;
+                ipdb.set_trace()
                 self._examples_processed += x.shape[0]
                 lrs = {
                     f"group_{i}": param["lr"]
@@ -224,6 +225,7 @@ class Trainer:
             for batch in self._eval_loader:
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
+                x, y = x.to(device), y.to(device)
                 n_examples = x.shape[0]
                 total_examples += n_examples
                 for key, loss in self._eval_one_batch(x, y).items():
