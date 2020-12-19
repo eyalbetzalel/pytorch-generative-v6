@@ -175,7 +175,7 @@ class Trainer:
             loss = self._get_loss_dict(self.eval_one_batch(x, y))
             return {k: v.item() for k, v in loss.items()}
 
-    def interleaved_train_and_eval(self, n_epochs,device):
+    def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
 
         for epoch in range(n_epochs):
@@ -187,7 +187,7 @@ class Trainer:
             for i, batch in enumerate(self._train_loader):
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                x, y = x.to(device), y.to(device)
+                x, y = x.to(self._device), y.to(self._device)
                 import ipdb;
                 ipdb.set_trace()
                 self._examples_processed += x.shape[0]
@@ -225,7 +225,7 @@ class Trainer:
             for batch in self._eval_loader:
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                x, y = x.to(device), y.to(device)
+                x, y = x.to(self._device), y.to(self._device)
                 n_examples = x.shape[0]
                 total_examples += n_examples
                 for key, loss in self._eval_one_batch(x, y).items():
