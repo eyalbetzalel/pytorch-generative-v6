@@ -28,7 +28,8 @@ MODEL_DICT = {
 
 
 def main(args):
-    device = "cuda" if args.use_cuda else "cpu"
+    device = "cuda" if args.use-cuda else "cpu"
+    import ipdb; ipdb.set_trace()
     MODEL_DICT[args.model].reproduce(
         args.n_epochs, args.batch_size, args.log_dir, device
     )
