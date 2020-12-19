@@ -58,18 +58,16 @@ class Trainer:
                 torch.device.
         """
         # Stateful objects that need to be saved.
-        import ipdb; ipdb.set_trace()
 
         self._optimizer = optimizer
         self._lr_scheduler = lr_scheduler
-
         self._loss_fn = loss_fn
         self._train_loader = train_loader
         self._eval_loader = eval_loader
         self._log_dir = log_dir or tempfile.mkdtemp()
         self._save_checkpoint_epochs = save_checkpoint_epochs
         self._device = torch.device(device) if isinstance(device, str) else device
-        self._model = model.to(self._device)
+        self._model = model.to('cuda')
         self._sample_epochs = sample_epochs
         self._sample_fn = sample_fn
         if self._sample_epochs:
@@ -188,9 +186,8 @@ class Trainer:
             for i, batch in enumerate(self._train_loader):
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                x, y = x.to(self._device), y.to(self._device)
-                import ipdb;
-                ipdb.set_trace()
+                # x, y = x.to(self._device), y.to(self._device)
+                x, y = x.to('cuda'), y.to('cuda')
                 self._examples_processed += x.shape[0]
                 lrs = {
                     f"group_{i}": param["lr"]
@@ -226,7 +223,8 @@ class Trainer:
             for batch in self._eval_loader:
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                x, y = x.to(self._device), y.to(self._device)
+                # x, y = x.to(self._device), y.to(self._device)
+                x, y = x.to('cuda'), y.to('cuda')
                 n_examples = x.shape[0]
                 total_examples += n_examples
                 for key, loss in self._eval_one_batch(x, y).items():
