@@ -178,8 +178,10 @@ class Trainer:
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
 
-        for _ in range(n_epochs):
+        for epoch in range(n_epochs):
             start_time = time.time()
+
+            print ("epoch " + str(epoch) + "out of " + str(n_epochs))
 
             # Train.
             for i, batch in enumerate(self._train_loader):

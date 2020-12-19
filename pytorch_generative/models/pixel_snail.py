@@ -249,26 +249,19 @@ def reproduce(
         num_workers=8,
     )
 
-    ####################################################################################################################
-
-    # transform = transforms.Compose(
-    #     [transforms.ToTensor(), lambda x: distributions.Bernoulli(probs=x).sample()]
-    # )
-    # train_loader = debug_loader or data.DataLoader(
-    #     datasets.MNIST("/tmp/data", train=True, download=True, transform=transform),
-    #     batch_size=batch_size,
-    #     shuffle=True,
-    #     num_workers=8,
-    # )
-    # test_loader = debug_loader or data.DataLoader(
-    #     datasets.MNIST("/tmp/data", train=False, download=True, transform=transform),
-    #     batch_size=batch_size,
-    #     num_workers=8,
-    # )
-
     model = models.PixelSNAIL(
+        ####################################################################################################################
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Change Input / Output size :
+
+        # 3 channels - image after clusters mapping function as input to NN :
         in_channels=3,
+
+        # 512 channels - each pixel get probability to get value from 0 to 511
         out_channels=512,
+
+        ####################################################################################################################
+
         n_channels=64,
         n_pixel_snail_blocks=8,
         n_residual_blocks=2,
@@ -280,20 +273,18 @@ def reproduce(
 
     def loss_fn(x, _, preds):
 
-        print("loss..")
+        ####################################################################################################################
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Update loss function to CrossEntropyLoss :
+
         x = x.long()
-        print("loss finisih..")
         criterion = nn.CrossEntropyLoss()
         B, C, D = preds.size()
         preds_2d = preds.view(B, C, D, -1)
         x_2d = x.view(B, D, -1)
         loss = criterion(preds_2d, x_2d.long())
 
-
-        # batch_size = x.shape[0]
-        # x, preds = x.view((batch_size, -1)), preds.view((batch_size, -1))
-        # loss = torch.nn.CrossEntropyLoss()
-        # output = loss(x,preds)
+        ####################################################################################################################
 
         return loss
 
