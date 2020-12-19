@@ -28,7 +28,7 @@ MODEL_DICT = {
 
 
 def main(args):
-    device = "cuda" if args.use-cuda else "cpu"
+    device = "cuda" if args.use_cuda else "cpu"
     import ipdb; ipdb.set_trace()
     MODEL_DICT[args.model].reproduce(
         args.n_epochs, args.batch_size, args.log_dir, device
@@ -62,7 +62,7 @@ if __name__ == "__main__":
         help="the directory where to log data",
         default="./tmp/run",
     )
-    parser.add_argument("--use-cuda", help="whether to use CUDA", action="store_true")
+    parser.add_argument("--use_cuda", help="whether to use CUDA", action="store_true")
     args = parser.parse_args()
 
     main(args)
