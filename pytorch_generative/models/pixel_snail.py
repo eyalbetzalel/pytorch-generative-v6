@@ -280,12 +280,11 @@ def reproduce(
 
     def loss_fn(x, _, preds):
 
-        import ipdb; ipdb.set_trace()
         criterion = nn.CrossEntropyLoss()
         B, C, D = preds.size()
         preds_2d = preds.view(B, C, D, -1)
         x_2d = x.view(B, D, -1)
-        loss = criterion(preds_2d, x_2d)
+        loss = criterion(preds_2d, x_2d.long())
 
 
         # batch_size = x.shape[0]
