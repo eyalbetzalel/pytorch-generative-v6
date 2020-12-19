@@ -58,6 +58,7 @@ class Trainer:
                 torch.device.
         """
         # Stateful objects that need to be saved.
+        import ipdb; ipdb.set_trace()
         self._model = model.to(device)
         self._optimizer = optimizer
         self._lr_scheduler = lr_scheduler
