@@ -198,7 +198,8 @@ class PixelSNAIL(base.AutoregressiveModel):
         x = self._input(x)
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
-        return self._output(x)
+            output = self._output(x)
+        return torch.reshape(output,[x.shape[0],512,-1])
 
 def reproduce(
     n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None
@@ -267,7 +268,7 @@ def reproduce(
 
     model = models.PixelSNAIL(
         in_channels=3,
-        out_channels=1,
+        out_channels=512,
         n_channels=64,
         n_pixel_snail_blocks=8,
         n_residual_blocks=2,
@@ -278,14 +279,21 @@ def reproduce(
     scheduler = lr_scheduler.MultiplicativeLR(optimizer, lr_lambda=lambda _: 0.999977)
 
     def loss_fn(x, _, preds):
-        batch_size = x.shape[0]
-        x, preds = x.view((batch_size, -1)), preds.view((batch_size, -1))
-        loss = torch.nn.CrossEntropyLoss()
-        import ipdb;
-        ipdb.set_trace()
-        output = loss(x,preds)
 
-        return output
+        import ipdb; ipdb.set_trace()
+        criterion = nn.CrossEntropyLoss()
+        B, C, D = preds.size()
+        preds_2d = preds.view(B, C, D, -1)
+        x_2d = x.view(B, D, -1)
+        loss = criterion(preds_2d, x_2d)
+
+
+        # batch_size = x.shape[0]
+        # x, preds = x.view((batch_size, -1)), preds.view((batch_size, -1))
+        # loss = torch.nn.CrossEntropyLoss()
+        # output = loss(x,preds)
+
+        return loss
 
     trainer = trainer.Trainer(
         model=model,
