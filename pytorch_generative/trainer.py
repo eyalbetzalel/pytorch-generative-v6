@@ -180,13 +180,10 @@ class Trainer:
         for epoch in range(n_epochs):
             start_time = time.time()
 
-            print ("epoch " + str(epoch) + " out of " + str(n_epochs))
-
             # Train.
             for i, batch in enumerate(self._train_loader):
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                # x, y = x.to(self._device), y.to(self._device)
                 x, y = x.to('cuda'), y.to('cuda')
                 self._examples_processed += x.shape[0]
                 lrs = {
@@ -195,8 +192,6 @@ class Trainer:
                 }
                 self._summary_writer.add_scalars("loss/lr", lrs, self._step)
                 loss = self._train_one_batch(x, y)
-                print("loss value: " + str(loss))
-                print("-------------------------------------------------------")
                 self._log_loss_dict(loss, training=True)
 
                 self._time_taken += time.time() - start_time
@@ -223,7 +218,6 @@ class Trainer:
             for batch in self._eval_loader:
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                # x, y = x.to(self._device), y.to(self._device)
                 x, y = x.to('cuda'), y.to('cuda')
                 n_examples = x.shape[0]
                 total_examples += n_examples
@@ -233,6 +227,9 @@ class Trainer:
             self._log_loss_dict(loss, training=False)
 
             self._epoch += 1
+
+            print("epoch " + str(self._epoch) + " out of " + str(n_epochs))
+
             self._save_checkpoint()
             if self._sample_epochs and self._epoch % self._sample_epochs == 0:
                 tensor = self._sample_fn(self._model)
