@@ -268,7 +268,7 @@ def reproduce(
         attention_value_channels=32,  # n_channels / 2
         attention_key_channels=4,  # attention_value_channels / 8
     )
-    optimizer = optim.Adam(model.parameters(), lr=1e-3)
+    optimizer = optim.Adam(model.parameters(), lr=1e-4)
     scheduler = lr_scheduler.MultiplicativeLR(optimizer, lr_lambda=lambda _: 0.999977)
 
     def loss_fn(x, _, preds):
