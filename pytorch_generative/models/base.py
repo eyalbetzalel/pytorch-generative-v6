@@ -47,6 +47,7 @@ class AutoregressiveModel(nn.Module):
                 will be generated.
         """
         with torch.no_grad():
+            import ipdb; ipdb.set_trace()
             conditioned_on = self._get_conditioned_on(out_shape, conditioned_on)
             n, c, h, w = conditioned_on.shape
             for row in range(h):

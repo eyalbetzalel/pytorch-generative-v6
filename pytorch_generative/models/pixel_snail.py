@@ -288,6 +288,7 @@ def reproduce(
 
         return loss
 
+
     trainer = trainer.Trainer(
         model=model,
         loss_fn=loss_fn,
@@ -297,5 +298,7 @@ def reproduce(
         lr_scheduler=scheduler,
         log_dir=log_dir,
         device=device,
+        sample_epochs = 1,
+        sample_fn=model.sample(),
     )
     trainer.interleaved_train_and_eval(n_epochs)
