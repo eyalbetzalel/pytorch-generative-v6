@@ -231,7 +231,7 @@ class Trainer:
 
             print("epoch " + str(self._epoch) + " out of " + str(n_epochs))
 
-            if self._epoch % 5 == 0: #self._sample_epochs == 0:
+            if self._epoch % 3 == 0: #self._sample_epochs == 0:
 
                 self._save_checkpoint()
                 yos = self._model.sample(out_shape = [1,1,1024,1])
