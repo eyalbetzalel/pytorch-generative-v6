@@ -233,8 +233,8 @@ class Trainer:
 
             self._save_checkpoint()
             if self._sample_epochs and self._epoch % self._sample_epochs == 0:
-                tensor = self._sample_fn(self._model)
                 import ipdb; ipdb.set_trace()
+                tensor = self._sample_fn(self._model)
                 self._summary_writer.add_images("sample", tensor, self._step)
 
         self._summary_writer.close()
