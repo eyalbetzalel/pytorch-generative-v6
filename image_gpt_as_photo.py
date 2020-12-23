@@ -44,7 +44,7 @@ train, test = load_h5_dataset(directory)
 pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
 global clusters
 clusters = torch.from_numpy(np.load(pathToCluster)).float()
-
+import ipdb; ipdb.set_trace()
 train = torch.reshape(train, [-1, 1, 32, 32])
 sample = torch.reshape(torch.round(127.5 * (clusters[train.long()] + 1.0)), [train.shape[0], 3, 32, 32]).to('cuda')
 _summary_writer.add_images("sample", sample)
