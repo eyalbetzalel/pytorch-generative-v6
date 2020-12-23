@@ -36,7 +36,7 @@ class AutoregressiveModel(nn.Module):
         return conditioned_on
 
     # TODO(eugenhotaj): This function does not handle subpixel sampling correctly.
-    def sample(self, out_shape=None, conditioned_on=None):
+    def sample(self, out_shape = [1,1,1024,1], conditioned_on = None):
         """Generates new samples from the model.
 
         Args:
