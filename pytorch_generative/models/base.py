@@ -5,7 +5,8 @@ from torch import distributions
 from torch import nn
 
 def _default_sample_fn(logits):
-    return distributions.Bernoulli(logits=logits).sample()
+
+    return torch.multinomial(torch.squeese(logits),1)
 
 class AutoregressiveModel(nn.Module):
     """The base class for Autoregressive generative models. """
