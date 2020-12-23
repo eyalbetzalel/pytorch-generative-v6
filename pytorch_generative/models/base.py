@@ -4,10 +4,8 @@ import torch
 from torch import distributions
 from torch import nn
 
-
 def _default_sample_fn(logits):
     return distributions.Bernoulli(logits=logits).sample()
-
 
 class AutoregressiveModel(nn.Module):
     """The base class for Autoregressive generative models. """
@@ -47,8 +45,8 @@ class AutoregressiveModel(nn.Module):
                 will be generated.
         """
         with torch.no_grad():
-            import ipdb; ipdb.set_trace()
             conditioned_on = self._get_conditioned_on(out_shape, conditioned_on)
+            import ipdb; ipdb.set_trace()
             n, c, h, w = conditioned_on.shape
             for row in range(h):
                 for col in range(w):

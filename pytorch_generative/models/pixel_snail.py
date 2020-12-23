@@ -20,10 +20,8 @@ import torch
 from torch import distributions
 from torch import nn
 from torch.nn import functional as F
-
 from pytorch_generative import nn as pg_nn
 from pytorch_generative.models import base
-
 import numpy as np
 
 pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
@@ -32,7 +30,6 @@ clusters = torch.from_numpy(np.load(pathToCluster)).float()
 
 def _elu_conv_elu(conv, x):
     return F.elu(conv(F.elu(x)))
-
 
 class ResidualBlock(nn.Module):
     """Residual block with a gated activation function."""
@@ -60,7 +57,6 @@ class ResidualBlock(nn.Module):
         out = _elu_conv_elu(self._input_conv, x)[:, :, :h, :w]
         out = self._activation(self._output_conv(out)[:, :, :h, :w])
         return x + out
-
 
 class PixelSNAILBlock(nn.Module):
     """Block comprised of a number of residual blocks plus one attention block.
@@ -123,7 +119,6 @@ class PixelSNAILBlock(nn.Module):
             _elu_conv_elu(self._attention_out, attn),
         )
         return _elu_conv_elu(self._out, res + attn)
-
 
 class PixelSNAIL(base.AutoregressiveModel):
     """The PixelSNAIL model.
@@ -200,9 +195,7 @@ class PixelSNAIL(base.AutoregressiveModel):
             output = self._output(x)
         return torch.reshape(output,[x.shape[0],512,-1])
 
-def reproduce(
-    n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None
-):
+def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None):
     """Training script with defaults to reproduce results.
 
     The code inside this function is self contained and can be used as a top level
@@ -299,6 +292,6 @@ def reproduce(
         log_dir=log_dir,
         device=device,
         sample_epochs = 1,
-        sample_fn=model.sample(),
+        sample_fn=model.sample(out_shape= [1,512,32,32]),
     )
     trainer.interleaved_train_and_eval(n_epochs)
