@@ -46,12 +46,14 @@ class AutoregressiveModel(nn.Module):
         """
         with torch.no_grad():
             conditioned_on = self._get_conditioned_on(out_shape, conditioned_on)
-            import ipdb; ipdb.set_trace()
+
             n, c, h, w = conditioned_on.shape
             for row in range(h):
                 for col in range(w):
                     out = self.forward(conditioned_on)
                     out = out[:,:,:,None]
+                    import ipdb;
+                    ipdb.set_trace()
                     out = out[:, :, row, col]
                     out = self._sample_fn(out).view(n, c)
                     conditioned_on[:, :, row, col] = torch.where(
