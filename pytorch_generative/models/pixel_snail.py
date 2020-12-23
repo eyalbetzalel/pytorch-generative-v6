@@ -192,10 +192,13 @@ class PixelSNAIL(base.AutoregressiveModel):
 
         input_img = x
         x = self._input(x)
+
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
             output = self._output(x)
-            output = torch.reshape(output,[x.shape[0],512,-1])
+
+        output = torch.reshape(output,[x.shape[0],512,-1])
+
         return self._softmax(output)
 
 def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None):
