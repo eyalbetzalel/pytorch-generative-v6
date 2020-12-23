@@ -46,6 +46,6 @@ global clusters
 clusters = torch.from_numpy(np.load(pathToCluster)).float()
 import ipdb; ipdb.set_trace()
 train = torch.reshape(torch.from_numpy(train), [-1, 32, 32])
-train = train[-1,None,-1,-1]
+#train = train[:,None,:,:]
 sample = torch.reshape(torch.round(127.5 * (clusters[train.long()] + 1.0)), [train.shape[0], 3, 32, 32]).to('cuda')
 _summary_writer.add_images("sample", sample)
