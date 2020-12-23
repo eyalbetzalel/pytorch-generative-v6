@@ -56,10 +56,11 @@ class AutoregressiveModel(nn.Module):
                     import ipdb;
                     ipdb.set_trace()
                     out = out[:, :, row, col]
-                    out = self._sample_fn(out).view(n, c)
-                    conditioned_on[:, :, row, col] = torch.where(
-                        conditioned_on[:, :, row, col] < 0,
-                        out,
-                        conditioned_on[:, :, row, col],
-                    )
+                    if torch.min(out) > 0:
+                        out = self._sample_fn(out).view(n, c)
+                        conditioned_on[:, :, row, col] = torch.where(
+                            conditioned_on[:, :, row, col] < 0,
+                            out,
+                            conditioned_on[:, :, row, col],
+                        )
             return conditioned_on
