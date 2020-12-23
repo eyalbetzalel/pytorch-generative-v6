@@ -182,6 +182,7 @@ class PixelSNAIL(base.AutoregressiveModel):
 
     def forward(self, x):
 
+        import ipdb; ipdb.set_trace()
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Mapping function from 1-ch cluster to 3-ch RGB images :
@@ -292,6 +293,6 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
         log_dir=log_dir,
         device=device,
         sample_epochs = 1,
-        sample_fn=model.to(device).sample(out_shape= [1,1,1024,1]),
+        sample_fn=model.to(device)().sample(out_shape= [1,1,1024,1]),
     )
     trainer.interleaved_train_and_eval(n_epochs)
