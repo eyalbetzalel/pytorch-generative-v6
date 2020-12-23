@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e7740515-9cd4-4280-a3e4-4d93ccda6f9a" name="Default Changelist" comment="Add mapping function">
+      <change beforePath="$PROJECT_DIR$/pytorch_generative/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/trainer.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1lpNFOohQeB0QJt5ZGaZVaacX29" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e7740515-9cd4-4280-a3e4-4d93ccda6f9a" name="Default Changelist" comment="" />
+      <created>1608289969797</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608289969797</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add mapping function">
+      <created>1608302993129</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1608302993129</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add mapping function">
+      <created>1608303045200</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1608303045200</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Add mapping function">
+      <created>1608303250735</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1608303250735</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add mapping function">
+      <created>1608303742788</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1608303742788</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add mapping function">
+      <created>1608303910897</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1608303910897</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add mapping function">
+      <created>1608304088066</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1608304088066</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Add mapping function">
+      <created>1608304180386</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1608304180386</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Add mapping function">
+      <created>1608305031656</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1608305031656</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Add mapping function">
+      <created>1608306155463</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1608306155463</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Add mapping function">
+      <created>1608306231648</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1608306231648</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Add mapping function">
+      <created>1608306511314</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1608306511314</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Add mapping function">
+      <created>1608306617631</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1608306617631</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Add mapping function">
+      <created>1608306716816</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1608306716816</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Add mapping function">
+      <created>1608375912065</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1608375912066</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Add mapping function">
+      <created>1608376035597</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1608376035597</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add mapping function">
+      <created>1608379239921</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1608379239921</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Add mapping function">
+      <created>1608379476677</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1608379476677</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Add mapping function">
+      <created>1608379647977</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1608379647977</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Add mapping function">
+      <created>1608379776032</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1608379776032</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Add mapping function">
+      <created>1608380518523</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1608380518523</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Add mapping function">
+      <created>1608386844677</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1608386844677</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Add mapping function">
+      <created>1608387583451</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1608387583451</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Add mapping function">
+      <created>1608387841946</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1608387841946</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Add mapping function">
+      <created>1608387994604</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1608387994604</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Add mapping function">
+      <created>1608388113284</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1608388113284</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Add mapping function">
+      <created>1608388261514</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1608388261514</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Add mapping function">
+      <created>1608388381336</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1608388381336</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Add mapping function">
+      <created>1608388708205</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1608388708205</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Add mapping function">
+      <created>1608388746976</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1608388746976</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Add mapping function">
+      <created>1608389047970</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1608389047970</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Add mapping function">
+      <created>1608389411380</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1608389411380</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Add mapping function">
+      <created>1608389870854</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1608389870854</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Add mapping function">
+      <created>1608390264689</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1608390264689</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Add mapping function">
+      <created>1608390452188</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1608390452188</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Add mapping function">
+      <created>1608390536984</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1608390536984</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Add mapping function">
+      <created>1608390572623</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1608390572623</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Add mapping function">
+      <created>1608390647293</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1608390647293</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Add mapping function">
+      <created>1608390772845</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1608390772845</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Add mapping function">
+      <created>1608390823609</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1608390823609</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Add mapping function">
+      <created>1608391027071</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1608391027071</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Add mapping function">
+      <created>1608393014729</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1608393014729</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Add mapping function">
+      <created>1608393218321</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1608393218321</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Add mapping function">
+      <created>1608539294471</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1608539294472</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Add mapping function">
+      <created>1608540411017</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1608540411017</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Add mapping function">
+      <created>1608540438659</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1608540438659</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Add mapping function">
+      <created>1608634436877</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1608634436877</updated>
+    </task>
+    <task id="LOCAL-00063" summary="sampling">
+      <created>1608729391410</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1608729391411</updated>
+    </task>
+    <task id="LOCAL-00064" summary="sampling">
+      <created>1608730061281</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1608730061281</updated>
+    </task>
+    <task id="LOCAL-00065" summary="sampling">
+      <created>1608730892126</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1608730892126</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Load data from ImageGPT" />
+    <MESSAGE value="Load data from ImageGPT - PixelSnail" />
+    <MESSAGE value="Add mapping function" />
+    <MESSAGE value="sampling" />
+    <option name="LAST_COMMIT_MESSAGE" value="sampling" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py</url>
+          <line>182</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py</url>
+          <line>266</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
