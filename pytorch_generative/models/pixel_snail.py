@@ -180,7 +180,7 @@ class PixelSNAIL(base.AutoregressiveModel):
             ),
         )
 
-        self._softmax = nn.LogSoftmax(dim = 1)
+        self._logsoftmax = nn.LogSoftmax(dim = 1)
 
     def forward(self, x):
 
@@ -199,7 +199,7 @@ class PixelSNAIL(base.AutoregressiveModel):
 
         output = torch.reshape(output,[x.shape[0],512,-1])
 
-        return self._softmax(output)
+        return self._logsoftmax(output)
 
 def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None):
     """Training script with defaults to reproduce results.
