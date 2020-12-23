@@ -2,6 +2,10 @@ import h5py
 import numpy as np
 import os
 import torch
+from torch.utils import tensorboard
+
+log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test'
+_summary_writer = tensorboard.SummaryWriter(log_dir, max_queue=100)
 
 
 def load_h5_dataset(directory):
@@ -43,3 +47,4 @@ clusters = torch.from_numpy(np.load(pathToCluster)).float()
 
 train = torch.reshape(train, [-1, 1, 32, 32])
 sample = torch.reshape(torch.round(127.5 * (clusters[train.long()] + 1.0)), [train.shape[0], 3, 32, 32]).to('cuda')
+_summary_writer.add_images("sample", sample)
