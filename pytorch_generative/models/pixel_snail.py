@@ -182,6 +182,7 @@ class PixelSNAIL(base.AutoregressiveModel):
 
     def forward(self, x):
 
+        import ipdb; ipdb.set_trace()
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Mapping function from 1-ch cluster to 3-ch RGB images :
