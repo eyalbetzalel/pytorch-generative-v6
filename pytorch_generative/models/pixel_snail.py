@@ -178,6 +178,8 @@ class PixelSNAIL(base.AutoregressiveModel):
             nn.Conv2d(
                 in_channels=n_channels // 2, out_channels=out_channels, kernel_size=1
             ),
+
+            nn.LogSoftmax(),
         )
 
     def forward(self, x):
@@ -271,7 +273,7 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
         # Update loss function to CrossEntropyLoss :
 
         x = x.long()
-        criterion = nn.CrossEntropyLoss()
+        criterion = nn.NLLLoss()
         B, C, D = preds.size()
         preds_2d = preds.view(B, C, D, -1)
         x_2d = x.view(B, D, -1)
