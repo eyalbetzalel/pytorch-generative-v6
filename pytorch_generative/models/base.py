@@ -50,7 +50,9 @@ class AutoregressiveModel(nn.Module):
             n, c, h, w = conditioned_on.shape
             for row in range(h):
                 for col in range(w):
-                    out = self.forward(conditioned_on)[:, :, row, col]
+                    out = self.forward(conditioned_on)
+                    out = out[:,:,:,None]
+                    out = out[:, :, row, col]
                     out = self._sample_fn(out).view(n, c)
                     conditioned_on[:, :, row, col] = torch.where(
                         conditioned_on[:, :, row, col] < 0,
