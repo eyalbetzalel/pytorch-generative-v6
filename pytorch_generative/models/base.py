@@ -23,6 +23,8 @@ class AutoregressiveModel(nn.Module):
         self._sample_fn = sample_fn or _default_sample_fn
 
     def _get_conditioned_on(self, out_shape, conditioned_on):
+
+        import ipdb; ipdb.set_trace()
         assert (
             out_shape is not None or conditioned_on is not None
         ), 'Must provided one, and only one of "out_shape" or "conditioned_on"'
