@@ -233,6 +233,7 @@ class Trainer:
 
             self._save_checkpoint()
             if self._sample_epochs and self._epoch % 5 == 0: #self._sample_epochs == 0:
+                #tensor = self._sample_fn(self._model)
                 tensor = self._sample_fn(self._model)
                 self._summary_writer.add_images("sample", tensor, self._step)
 
