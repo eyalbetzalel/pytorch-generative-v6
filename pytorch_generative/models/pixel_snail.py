@@ -178,9 +178,9 @@ class PixelSNAIL(base.AutoregressiveModel):
             nn.Conv2d(
                 in_channels=n_channels // 2, out_channels=out_channels, kernel_size=1
             ),
-
-            nn.LogSoftmax(),
         )
+
+        self._softmax = nn.LogSoftmax()
 
     def forward(self, x):
 
@@ -195,7 +195,8 @@ class PixelSNAIL(base.AutoregressiveModel):
         for block in self._pixel_snail_blocks:
             x = x + block(x, input_img)
             output = self._output(x)
-        return torch.reshape(output,[x.shape[0],512,-1])
+            output = torch.reshape(output,[x.shape[0],512,-1])
+        return self._softmax(output, dim = 1)
 
 def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None):
     """Training script with defaults to reproduce results.
