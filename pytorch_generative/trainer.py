@@ -233,7 +233,7 @@ class Trainer:
 
             self._save_checkpoint()
 
-            model.sample(out_shape = [1,1,1024,1])
+            self._model.sample(out_shape = [1,1,1024,1])
 
             if self._sample_epochs and self._epoch % 1 == 0: #self._sample_epochs == 0:
                 #tensor = self._sample_fn(self._model)
