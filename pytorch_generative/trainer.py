@@ -7,6 +7,11 @@ import time
 
 import torch
 from torch.utils import tensorboard
+import numpy as np
+
+pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
+global clusters
+clusters = torch.from_numpy(np.load(pathToCluster)).float()
 
 
 class Trainer:
@@ -233,10 +238,18 @@ class Trainer:
 
             if self._epoch % 1 == 0: #self._sample_epochs == 0:
 
+                ####################################################################################################################
+                # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                # Mapping function from 1-ch cluster to 3-ch RGB images :
 
-                self._save_checkpoint()
-                yos = self._model.sample(out_shape = [1,1,1024,1])
                 import ipdb; ipdb.set_trace()
+                self._save_checkpoint()
+                sample = self._model.sample(out_shape = [1,1,1024,1])
+                sample = torch.reshape(sample, [1,1,32,32])
+                sample = torch.reshape(torch.round(127.5 * (clusters[sample] + 1.0)), [sample.shape[0], 3, 32, 32]).to('cuda')
+
+                ####################################################################################################################
+
 
 
             if self._sample_epochs and self._epoch % 1 == 0: #self._sample_epochs == 0:
