@@ -292,6 +292,6 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
         log_dir=log_dir,
         device=device,
         sample_epochs = 1,
-        sample_fn=model.sample(out_shape= [1,512,32,32]),
+        sample_fn=model.sample(out_shape= [1,3,32,32]),
     )
     trainer.interleaved_train_and_eval(n_epochs)
