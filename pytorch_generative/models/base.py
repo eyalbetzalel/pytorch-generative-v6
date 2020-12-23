@@ -24,7 +24,7 @@ class AutoregressiveModel(nn.Module):
 
     def _get_conditioned_on(self, out_shape, conditioned_on):
 
-        import ipdb; ipdb.set_trace()
+
         assert (
             out_shape is not None or conditioned_on is not None
         ), 'Must provided one, and only one of "out_shape" or "conditioned_on"'
@@ -58,7 +58,7 @@ class AutoregressiveModel(nn.Module):
                     out = out[:, :, row, col]
 
                     if torch.min(out) > 0:
-                        import ipdb; ipdb.set_trace()
+
                         out = self._sample_fn(out).view(n, c)
                         conditioned_on[:, :, row, col] = torch.where(
                             conditioned_on[:, :, row, col] < 0,

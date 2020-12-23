@@ -231,9 +231,11 @@ class Trainer:
 
             print("epoch " + str(self._epoch) + " out of " + str(n_epochs))
 
-            self._save_checkpoint()
+            if self._epoch % 5 == 0: #self._sample_epochs == 0:
 
-            self._model.sample(out_shape = [1,1,1024,1])
+                self._save_checkpoint()
+                yos = self._model.sample(out_shape = [1,1,1024,1])
+                import ipdb; ipdb.set_trace()
 
             if self._sample_epochs and self._epoch % 1 == 0: #self._sample_epochs == 0:
                 #tensor = self._sample_fn(self._model)
