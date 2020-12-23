@@ -182,6 +182,7 @@ class Trainer:
 
             # Train.
             for i, batch in enumerate(self._train_loader):
+                import ipdb; ipdb.set_trace()
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
                 x, y = x.to('cuda'), y.to('cuda')
