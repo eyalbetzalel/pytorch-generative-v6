@@ -1,4 +1,5 @@
 import numpy as np
+from image_gpt_as_photo import transform_cluster_to_image
 
 def load_data(data_path):
     trX = np.load(f'{data_path}_trX.npy')
@@ -11,4 +12,5 @@ def load_data(data_path):
 
 data_path = './cifar10'
 (trX, trY), (vaX, vaY), (teX, teY) = load_data(data_path)
+transform_cluster_to_image(trX)
 import ipdb; ipdb.set_trace()
