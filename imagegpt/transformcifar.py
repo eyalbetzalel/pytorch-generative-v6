@@ -3,6 +3,7 @@ import numpy as np
 import os
 import torch
 from torch.utils import tensorboard
+import torchvision
 
 pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
 global clusters
@@ -27,6 +28,10 @@ data_path = './cifar10'
 sample = transform_cluster_to_image(trX)
 
 log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test'
-_summary_writer = tensorboard.SummaryWriter(log_dir, max_queue=100)
-_summary_writer.add_images("sample", sample)
+_summary_writer = tensorboard.SummaryWriter(log_dir = log_dir, max_queue=100)
+
+sample = torchvision.utils.make_grid(sample)
+
+
+_summary_writer.add_images('sample',sample,0)
 _summary_writer.close()
