@@ -23,6 +23,26 @@ def load_data(data_path):
     teY = np.load(f'{data_path}_teY.npy')
     return (trX, trY), (vaX, vaY), (teX, teY)
 
+
+def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, padding=2, normalize=False, pad_value=0):
+    """Plot 4D Tensor of images of shape (B x C x H x W) as a grid."""
+
+    grid = torchvision.utils.make_grid(x, nrow=nrow, padding=padding, normalize=normalize, pad_value=pad_value)
+    npgrid = grid.cpu().numpy()
+
+    plt.imshow(np.transpose(npgrid, (1, 2, 0)), interpolation='nearest')
+
+    ax = plt.gca()
+    ax.xaxis.set_visible(False)
+    ax.yaxis.set_visible(False)
+
+    if not (title == ''):
+        plt.title(title)
+
+    plt.savefig(export_img, bbox_inches='tight', pad_inches=0.1)
+    plt.clf()
+
+
 data_path = './cifar10'
 (trX, trY), (vaX, vaY), (teX, teY) = load_data(data_path)
 sample = transform_cluster_to_image(vaX)
@@ -31,9 +51,10 @@ log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
 # _summary_writer = tensorboard.SummaryWriter(log_dir = log_dir, max_queue=100)
 # _summary_writer.add_images('sample',sample,0)
 # _summary_writer.close()
-x = torchvision.utils.make_grid(sample[1:48,:,:,:])
+
+plot_images_grid(sample[1:48,:,:,:], export_img=log_dir)
 import ipdb; ipdb.set_trace()
-torchvision.utils.save_image(x , log_dir)
+
 
 
 
