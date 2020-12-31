@@ -57,11 +57,7 @@ log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
 # _summary_writer.close()
 
 pytorch_tensor = sample[1:48,:,:,:]
-np_tensor = pytorch_tensor.cpu().numpy()
-tf_tensor = tf.convert_to_tensor(np_tensor)
-
-
-plot_images_grid(tf_tensor, export_img=log_dir)
+plot_images_grid(pytorch_tensor, export_img=log_dir)
 import ipdb; ipdb.set_trace()
 
 
