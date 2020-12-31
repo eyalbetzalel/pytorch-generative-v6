@@ -29,3 +29,4 @@ sample = transform_cluster_to_image(trX)
 log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test'
 _summary_writer = tensorboard.SummaryWriter(log_dir, max_queue=100)
 _summary_writer.add_images("sample", sample)
+_summary_writer.close()
