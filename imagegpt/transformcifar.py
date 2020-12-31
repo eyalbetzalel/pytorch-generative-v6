@@ -9,6 +9,6 @@ def load_data(data_path):
     teY = np.load(f'{data_path}_teY.npy')
     return (trX, trY), (vaX, vaY), (teX, teY)
 
-data_path = '/home/dsi/eyalbetzalel/pytorch-generative-v6/imagegpt/download/'
+data_path = './download/'
 (trX, trY), (vaX, vaY), (teX, teY) = load_data(data_path)
 import ipdb; ipdb.set_trace()
