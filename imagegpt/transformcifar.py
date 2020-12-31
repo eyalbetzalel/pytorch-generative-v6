@@ -16,8 +16,11 @@ clusters = torch.from_numpy(np.load(pathToCluster)).float()
 def transform_cluster_to_image(data):
     data = torch.reshape(torch.from_numpy(data), [-1, 32, 32])
     # [np.reshape(np.rint(127.5 * (clusters[s] + 1.0)), [32, 32, 3]).astype(np.uint8) for s in samples]
-    sample = torch.reshape(torch.round(127.5 * (clusters[data.long()] + 1.0)), [data.shape[0], 3, 32, 32]).to('cuda')
-    import ipdb; ipdb.set_trace()
+    import ipdb;
+    ipdb.set_trace()
+
+    sample = torch.reshape(torch.round(127.5 * (clusters.index_select(data.long()) + 1.0)), [data.shape[0], 3, 32, 32]).to('cuda')
+
     return sample
 
 def load_data(data_path):
@@ -36,7 +39,6 @@ def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, paddi
     grid = torchvision.utils.make_grid(x, nrow=nrow, padding=padding, normalize=normalize, pad_value=pad_value)
     npgrid = grid.cpu().numpy()
     npgrid = npgrid.astype(np.uint8)
-    import ipdb; ipdb.set_trace()
     im = np.transpose(npgrid, (1, 2, 0))
     plt.imsave(export_img,im)
 
@@ -52,7 +54,6 @@ log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
 
 pytorch_tensor = sample[1:48,:,:,:]
 plot_images_grid(pytorch_tensor, export_img=log_dir)
-import ipdb; ipdb.set_trace()
 
 
 
