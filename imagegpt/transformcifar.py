@@ -28,7 +28,7 @@ def transform_cluster_to_image(samples):
     clusters = torch.from_numpy(np.load(pathToCluster)).float()
 
     # sample_new = torch.reshape(torch.round(127.5 * (torch.index_select(clusters, 0, data_tor.long().flatten()) + 1.0)),[data_tor.shape[0], 3, 32, 32]).to('cuda')
-    sample_new = torch.round(127.5 * (clusters[data.long()] + 1.0))
+    sample_new = torch.round(127.5 * (clusters[data_tor.long()] + 1.0))
     sample_new = sample_new.permute(0, 3, 1, 2)
     yos = torch.eq(samples,sample_new)
     import ipdb;
