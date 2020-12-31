@@ -33,18 +33,8 @@ def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, paddi
 
     grid = torchvision.utils.make_grid(x, nrow=nrow, padding=padding, normalize=normalize, pad_value=pad_value)
     npgrid = grid.cpu().numpy()
-
-    plt.imshow(np.transpose(npgrid, (1, 2, 0)), interpolation='nearest')
-
-    ax = plt.gca()
-    ax.xaxis.set_visible(False)
-    ax.yaxis.set_visible(False)
-
-    if not (title == ''):
-        plt.title(title)
-
-    plt.savefig(export_img, bbox_inches='tight', pad_inches=0.1)
-    plt.clf()
+    im = np.transpose(npgrid, (1, 2, 0))
+    plt.imsave(export_img,im)
 
 
 data_path = './cifar10'
