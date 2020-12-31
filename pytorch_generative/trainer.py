@@ -246,8 +246,9 @@ class Trainer:
                 self._save_checkpoint()
                 sample = self._model.sample(out_shape = [1,1,1024,1])
                 sample = torch.reshape(sample, [1,1,32,32])
-                sample = torch.reshape(torch.round(127.5 * (clusters[sample] + 1.0)), [sample.shape[0], 3, 32, 32]).to('cuda')
-                #sample = torch.squeeze(sample)
+                # sample = torch.reshape(torch.round(127.5 * (clusters[sample] + 1.0)), [sample.shape[0], 3, 32, 32]).to('cuda')
+                sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
+                sample = sample.permute(0, 3, 1, 2)
                 self._summary_writer.add_images("sample", sample, self._step)
 
                 ####################################################################################################################
