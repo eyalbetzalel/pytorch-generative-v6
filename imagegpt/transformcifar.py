@@ -28,7 +28,7 @@ def load_data(data_path):
     return (trX, trY), (vaX, vaY), (teX, teY)
 
 
-def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, padding=2, normalize=False, pad_value=0):
+def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, padding=2, normalize=True, pad_value=0):
     """Plot 4D Tensor of images of shape (B x C x H x W) as a grid."""
 
     grid = torchvision.utils.make_grid(x, nrow=nrow, padding=padding, normalize=normalize, pad_value=pad_value)
