@@ -4,6 +4,7 @@ import os
 import torch
 from torch.utils import tensorboard
 import torchvision
+import matplotlib.pyplot as plt
 
 pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
 global clusters
