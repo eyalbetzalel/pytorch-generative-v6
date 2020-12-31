@@ -1,5 +1,5 @@
 import numpy as np
-from image_gpt_as_photo import transform_cluster_to_image
+from pytorch-generative-v6.image_gpt_as_photo import transform_cluster_to_image
 
 def load_data(data_path):
     trX = np.load(f'{data_path}_trX.npy')
