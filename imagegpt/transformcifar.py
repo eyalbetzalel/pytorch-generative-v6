@@ -22,17 +22,13 @@ def transform_cluster_to_image(samples):
     samples = torch.stack(samples)
     samples = samples.permute(0, 3, 1, 2)
 
-    ############################### OLD ########################################################
 
-    #
-    # data = torch.reshape(torch.from_numpy(data), [-1, 32, 32])
-    # # [np.reshape(np.rint(127.5 * (clusters[s] + 1.0)), [32, 32, 3]).astype(np.uint8) for s in samples]
-    #
-    # sample_new = torch.reshape(torch.round(127.5 * (torch.index_select(clusters, 0, data.long().flatten()) + 1.0)),
-    #                        [data.shape[0], 3, 32, 32]).to('cuda')
+    ############################### NEW ########################################################
+    data_tor = torch.reshape(torch.from_numpy(data), [-1, 32, 32])
+    import ipdb; ipdb.set_trace()
+    sample_new = torch.reshape(torch.round(127.5 * (torch.index_select(clusters, 0, data_tor.long().flatten()) + 1.0)),[data.shape[0], 3, 32, 32]).to('cuda')
     # sample = torch.reshape(torch.round(127.5 * (clusters[data.long()] + 1.0)), [data.shape[0], 3, 32, 32]).to('cuda')
-    # yos = torch.eq(sample,sample_new)
-    # import ipdb; ipdb.set_trace()
+    yos = torch.eq(sample,sample_new)
 
     return samples
 
