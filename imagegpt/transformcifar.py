@@ -25,7 +25,7 @@ def load_data(data_path):
 
 data_path = './cifar10'
 (trX, trY), (vaX, vaY), (teX, teY) = load_data(data_path)
-sample = transform_cluster_to_image(trX)
+sample = transform_cluster_to_image(vaX)
 
 log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
 # _summary_writer = tensorboard.SummaryWriter(log_dir = log_dir, max_queue=100)
