@@ -60,6 +60,7 @@ pytorch_tensor = sample[1:48,:,:,:]
 np_tensor = pytorch_tensor.numpy()
 tf_tensor = tf.convert_to_tensor(np_tensor)
 
+
 plot_images_grid(tf_tensor, export_img=log_dir)
 import ipdb; ipdb.set_trace()
 
