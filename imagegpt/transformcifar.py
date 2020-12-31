@@ -27,11 +27,13 @@ data_path = './cifar10'
 (trX, trY), (vaX, vaY), (teX, teY) = load_data(data_path)
 sample = transform_cluster_to_image(trX)
 
-log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test.png'
+log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
 # _summary_writer = tensorboard.SummaryWriter(log_dir = log_dir, max_queue=100)
 # _summary_writer.add_images('sample',sample,0)
 # _summary_writer.close()
-torchvision.utils.save_image(torchvision.utils.make_grid(sample[1:48,:,:,:]), log_dir)
+x = torchvision.utils.make_grid(sample[1:48,:,:,:])
+import ipdb; ipdb.set_trace()
+torchvision.utils.save_image(x , log_dir)
 
 
 
