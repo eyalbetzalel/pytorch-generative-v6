@@ -16,10 +16,11 @@ clusters = torch.from_numpy(np.load(pathToCluster)).float()
 def transform_cluster_to_image(data):
     data = torch.reshape(torch.from_numpy(data), [-1, 32, 32])
     # [np.reshape(np.rint(127.5 * (clusters[s] + 1.0)), [32, 32, 3]).astype(np.uint8) for s in samples]
+
+
+    sample = torch.reshape(torch.round(127.5 * (torch.index_select(clusters,0,data.long()) + 1.0)), [data.shape[0], 3, 32, 32]).to('cuda')
     import ipdb;
     ipdb.set_trace()
-
-    sample = torch.reshape(torch.round(127.5 * (clusters.index_select(data.long()) + 1.0)), [data.shape[0], 3, 32, 32]).to('cuda')
 
     return sample
 
