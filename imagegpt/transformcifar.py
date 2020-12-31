@@ -19,7 +19,9 @@ def transform_cluster_to_image(samples):
     clusters =np.load(pathToCluster)
     samples = [torch.from_numpy(np.reshape(np.rint(127.5 * (clusters[s.astype(int).tolist()] + 1.0)), [32, 32, 3]).astype(np.float32)) for
                s in samples]
-    samples = a = torch.stack(samples)
+    samples = torch.stack(samples)
+    import ipdb; ipdb.set_trace()
+
     ############################### OLD ########################################################
 
     #
