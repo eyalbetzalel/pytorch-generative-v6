@@ -57,6 +57,7 @@ class AutoregressiveModel(nn.Module):
 
             for row in range(h):
                 for col in range(w):
+                    import ipdb; ipdb.set_trace()
                     out = self.forward(conditioned_on)
                     out = out[:,:,:,None]
                     out = out[:, :, row, col]
