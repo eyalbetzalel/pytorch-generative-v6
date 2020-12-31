@@ -5,6 +5,9 @@ import torch
 from torch.utils import tensorboard
 import torchvision
 import matplotlib.pyplot as plt
+import tensorflow as tf
+
+
 
 pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
 global clusters
@@ -53,7 +56,11 @@ log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
 # _summary_writer.add_images('sample',sample,0)
 # _summary_writer.close()
 
-plot_images_grid(sample[1:48,:,:,:], export_img=log_dir)
+pytorch_tensor = sample[1:48,:,:,:]
+np_tensor = pytorch_tensor.numpy()
+tf_tensor = tf.convert_to_tensor(np_tensor)
+
+plot_images_grid(tf_tensor, export_img=log_dir)
 import ipdb; ipdb.set_trace()
 
 
