@@ -57,7 +57,7 @@ log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
 # _summary_writer.close()
 
 pytorch_tensor = sample[1:48,:,:,:]
-np_tensor = pytorch_tensor.numpy()
+np_tensor = pytorch_tenso.cpu().numpy()
 tf_tensor = tf.convert_to_tensor(np_tensor)
 
 
