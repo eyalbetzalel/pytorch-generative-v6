@@ -52,7 +52,7 @@ class AutoregressiveModel(nn.Module):
 
             h, w = conditioned_on.shape
             n=1
-            c=3
+            c=1
             conditioned_on = conditioned_on.long()
 
 
@@ -65,7 +65,7 @@ class AutoregressiveModel(nn.Module):
                     out = self.forward(conditioned_on)
                     out = out[:,:,:,None]
                     out = out[:, :, row, col]
-                    import ipdb; ipdb.set_trace()
+                    # import ipdb; ipdb.set_trace()
                     out = self._sample_fn(torch.exp(out)).view(n, c)
                     conditioned_on[:, :, row, col] = torch.where(
                         conditioned_on[:, :, row, col] < 0,
