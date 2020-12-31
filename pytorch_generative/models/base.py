@@ -50,8 +50,9 @@ class AutoregressiveModel(nn.Module):
         with torch.no_grad():
             conditioned_on = self._get_conditioned_on(out_shape, conditioned_on)
 
-            n, c, h, w = conditioned_on.shape
-
+            h, w = conditioned_on.shape
+            n=1
+            c=3
             conditioned_on = conditioned_on.long()
 
 
