@@ -50,14 +50,14 @@ class AutoregressiveModel(nn.Module):
         with torch.no_grad():
             conditioned_on = self._get_conditioned_on(out_shape, conditioned_on)
 
-            w, h = conditioned_on.shape
+            h, w = conditioned_on.shape
             n=1
             c=1
             conditioned_on = conditioned_on.long()
 
 
-            for row in range(h):
-                for col in range(w):
+            for row in range(w):
+                for col in range(h):
 
 
                     # ipdb > conditioned_on.shape
