@@ -189,9 +189,9 @@ class PixelSNAIL(base.AutoregressiveModel):
         # Mapping function from 1-ch cluster to 3-ch RGB images :
         # x = torch.reshape(torch.round(127.5 * (clusters[x.long()] + 1.0)), [x.shape[0] ,3, 32, 32]).to('cuda')
         import ipdb; ipdb.set_trace()
+        x = torch.round(127.5 * (clusters[x.long()] + 1.0))
         x = x[:,:,None,:]
         x = torch.reshape(x, [-1, 32, 32,-1])
-        x = torch.round(127.5 * (clusters[x.long()] + 1.0))
         x = x.permute(0, 3, 1, 2)
         x = x.to('cuda')
         ####################################################################################################################
