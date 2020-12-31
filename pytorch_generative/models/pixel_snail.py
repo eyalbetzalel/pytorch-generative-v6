@@ -191,7 +191,7 @@ class PixelSNAIL(base.AutoregressiveModel):
         import ipdb; ipdb.set_trace()
         x = torch.round(127.5 * (clusters[x.long()] + 1.0))
         x = x[:,:,None,:]
-        x = torch.reshape(x, [-1, 32, 32,-1])
+        x = torch.reshape(x, [x.shape[0], 32, 32,x.shape[0]])
         x = x.permute(0, 3, 1, 2)
         x = x.to('cuda')
         ####################################################################################################################
