@@ -187,8 +187,11 @@ class PixelSNAIL(base.AutoregressiveModel):
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Mapping function from 1-ch cluster to 3-ch RGB images :
-        # x = torch.reshape(torch.round(127.5 * (clusters[x.long()] + 1.0)), [x.shape[0] ,3, 32, 32]).to('cuda')
 
+        # TODO : When sampling there is bug with the input dimensions to the input function.
+        # TODO : Make sure that input dimensions are allign both in sampling and in training.
+        # TODO : Add Note of the dimensions in each line in training and debug and compere on sampling
+        import ipdb; ipdb.set_trace()
         x = torch.round(127.5 * (clusters[x.long()] + 1.0))
         if sampleFlag:
             x = x.permute(1, 0, 2)
@@ -206,6 +209,7 @@ class PixelSNAIL(base.AutoregressiveModel):
             output = self._output(x)
 
         output = torch.reshape(output,[x.shape[0],512,-1])
+
 
         return self._logsoftmax(output)
 
