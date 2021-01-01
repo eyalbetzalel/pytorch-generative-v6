@@ -90,8 +90,4 @@ class AutoregressiveModel(nn.Module):
 
                     )
 
-                    # out.shape =
-                    # conditioned_on =
-            import ipdb;
-            ipdb.set_trace()
             return conditioned_on

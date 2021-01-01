@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e7740515-9cd4-4280-a3e4-4d93ccda6f9a" name="Default Changelist" comment="Add mapping function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imagegpt/transformcifar.py" beforeDir="false" afterPath="$PROJECT_DIR$/imagegpt/transformcifar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytorch_generative/models/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/models/base.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,34 +43,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608289969797</updated>
-    </task>
-    <task id="LOCAL-00157" summary="sampling">
-      <created>1609427034001</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
-      <option name="project" value="LOCAL" />
-      <updated>1609427034001</updated>
-    </task>
-    <task id="LOCAL-00158" summary="sampling">
-      <created>1609427545916</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
-      <option name="project" value="LOCAL" />
-      <updated>1609427545916</updated>
-    </task>
-    <task id="LOCAL-00159" summary="sampling">
-      <created>1609427851528</created>
-      <option name="number" value="00159" />
-      <option name="presentableId" value="LOCAL-00159" />
-      <option name="project" value="LOCAL" />
-      <updated>1609427851528</updated>
-    </task>
-    <task id="LOCAL-00160" summary="sampling">
-      <created>1609428178166</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1609428178166</updated>
     </task>
     <task id="LOCAL-00161" summary="sampling">
       <created>1609428416902</created>
@@ -388,7 +359,35 @@
       <option name="project" value="LOCAL" />
       <updated>1609508465488</updated>
     </task>
-    <option name="localTasksCounter" value="206" />
+    <task id="LOCAL-00206" summary="sampling">
+      <created>1609510016214</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1609510016214</updated>
+    </task>
+    <task id="LOCAL-00207" summary="sampling">
+      <created>1609510312375</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1609510312375</updated>
+    </task>
+    <task id="LOCAL-00208" summary="sampling">
+      <created>1609511410463</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1609511410463</updated>
+    </task>
+    <task id="LOCAL-00209" summary="sampling">
+      <created>1609511434240</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1609511434240</updated>
+    </task>
+    <option name="localTasksCounter" value="210" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
