@@ -191,13 +191,29 @@ class PixelSNAIL(base.AutoregressiveModel):
         # TODO : When sampling there is bug with the input dimensions to the input function.
         # TODO : Make sure that input dimensions are allign both in sampling and in training.
         # TODO : Add Note of the dimensions in each line in training and debug and compere on sampling
-        import ipdb; ipdb.set_trace()
+
+        # Training --> x.shape =  torch.Size([128, 1024])
+
         x = torch.round(127.5 * (clusters[x.long()] + 1.0))
+
+        # Training --> x.shape = torch.Size([128, 1024, 3])
+
         if sampleFlag:
             x = x.permute(1, 0, 2)
+
+
         x = x[:,:,None,:]
+
+        # Training --> x.shape = torch.Size([128, 1024, 1, 3])
+
         x = torch.reshape(x, [x.shape[0], 32, 32,x.shape[3]])
+
+        # Training --> x.shape = torch.Size([128, 32, 32, 3])
+
         x = x.permute(0, 3, 1, 2)
+
+        # Training --> x.shape = torch.Size([128, 3, 32, 32])
+
         x = x.to('cuda')
         ####################################################################################################################
 
