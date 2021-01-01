@@ -16,9 +16,9 @@ def transform_cluster_to_image(samples):
     clusters = torch.from_numpy(np.load(pathToCluster)).float()
     sample_new = torch.round(127.5 * (clusters[data_tor.long()] + 1.0))
     sample_new = sample_new.permute(0, 3, 1, 2)
-    yos = torch.eq(samples,sample_new)
 
-    return samples
+
+    return sample_new
 
 def load_data(data_path):
     trX = np.load(f'{data_path}_trX.npy')
