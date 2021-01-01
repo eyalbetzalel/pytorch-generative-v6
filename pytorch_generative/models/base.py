@@ -56,24 +56,41 @@ class AutoregressiveModel(nn.Module):
             conditioned_on = conditioned_on.long()
 
 
-            for row in range(w):
-                for col in range(h):
+            for row in range(w): # w =1
+                for col in range(h): # h = 1024
 
                     import ipdb; ipdb.set_trace()
 
+                    # conditioned_on = torch.Size([1024, 1])
+
                     out = self.forward(conditioned_on,sampleFlag = True)
+
+                    # out.shape = torch.Size([1, 512, 1024])
+                    # conditioned_on = torch.Size([1024, 1])
 
                     out = out[:,:,:,None]
 
-                    out = out[:, :, row, col]
+                    # out.shape = torch.Size([1, 512, 1024, 1])
+                    # conditioned_on = torch.Size([1024, 1])
+
+                    out = out[:, :, col, row] # TODO : <==== Switch row (w) with col (h) or permute out tensor
+
+                    # out.shape = torch.Size([1, 512])
+                    # conditioned_on = torch.Size([1024, 1])
 
                     out = self._sample_fn(torch.exp(out)).view(n, c)
 
-                    conditioned_on[row, col] = torch.where(
-                        conditioned_on[row, col] < 0,
+                    # out.shape = torch.Size([1, 1])
+                    # conditioned_on = torch.Size([1024, 1])
+
+                    conditioned_on[col, row] = torch.where(
+                        conditioned_on[col, row] < 0,
                         out,
-                        conditioned_on[row, col],
+                        conditioned_on[col, row],
 
                     )
+
+                    # out.shape =
+                    # conditioned_on =
 
             return conditioned_on
