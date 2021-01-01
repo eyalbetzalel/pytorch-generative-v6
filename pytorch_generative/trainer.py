@@ -249,7 +249,7 @@ class Trainer:
 
             print("epoch " + str(self._epoch) + " out of " + str(n_epochs))
 
-            if self._epoch % 1 == 0: #self._sample_epochs == 0:
+            if self._epoch % 3 == 0: #self._sample_epochs == 0:
                 self._save_checkpoint()
 
                 ####################################################################################################################
@@ -259,7 +259,6 @@ class Trainer:
 
                     print("------------------ Sampling" + str(i) + "out of 5 (long) ------------------")
                     sample = self._model.sample(out_shape=[1024, 1])
-                    import ipdb; ipdb.set_trace()
                     sample = torch.reshape(sample, [32,32])
                     sample = sample[None, :, :]
                     sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
