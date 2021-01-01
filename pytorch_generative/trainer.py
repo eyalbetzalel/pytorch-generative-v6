@@ -249,7 +249,7 @@ class Trainer:
 
             print("epoch " + str(self._epoch) + " out of " + str(n_epochs))
 
-            if self._epoch % 5 == 0: #self._sample_epochs == 0:
+            if self._epoch % 1 == 0: #self._sample_epochs == 0:
                 self._save_checkpoint()
 
                 ####################################################################################################################
@@ -264,7 +264,7 @@ class Trainer:
                     sample = sample[None, :, :]
                     sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
                     sample = sample.permute(0, 3, 1, 2)
-                    f_name = ".samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+                    f_name = "./samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
                     plot_images_grid(sample,f_name)
 
                 self._summary_writer.add_images("sample", sample, self._step)
