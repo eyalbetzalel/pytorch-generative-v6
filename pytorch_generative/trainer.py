@@ -4,7 +4,8 @@ import collections
 import os
 import tempfile
 import time
-
+import torchvision
+import matplotlib.pyplot as plt
 import torch
 from torch.utils import tensorboard
 import numpy as np
@@ -179,6 +180,13 @@ class Trainer:
             loss = self._get_loss_dict(self.eval_one_batch(x, y))
             return {k: v.item() for k, v in loss.items()}
 
+    def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, padding=2, normalize=True, pad_value=0):
+        """Plot 4D Tensor of images of shape (B x C x H x W) as a grid."""
+        grid = torchvision.utils.make_grid(x, nrow=nrow, padding=padding, normalize=normalize, pad_value=pad_value)
+        npgrid = grid.cpu().numpy()
+        im = np.transpose(npgrid, (1, 2, 0))
+        plt.imsave(export_img, im)
+
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
 
@@ -250,8 +258,6 @@ class Trainer:
                 sample = sample[None, :, :]
                 sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
                 sample = sample.permute(0, 3, 1, 2)
-
-                from imagegpt.transformcifar import plot_images_grid
                 plot_images_grid(sample,'./')
 
                 self._summary_writer.add_images("sample", sample, self._step)
