@@ -257,7 +257,7 @@ class Trainer:
                 # Mapping function from 1-ch cluster to 3-ch RGB images :
                 for i in range(5):
 
-                    print("Sampling" + str(i) + "out of 5 (long)...")
+                    print("------------------ Sampling" + str(i) + "out of 5 (long) ------------------")
                     sample = self._model.sample(out_shape=[1024, 1])
                     import ipdb; ipdb.set_trace()
                     sample = torch.reshape(sample, [32,32])

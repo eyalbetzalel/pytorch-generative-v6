@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e7740515-9cd4-4280-a3e4-4d93ccda6f9a" name="Default Changelist" comment="Add mapping function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytorch_generative/models/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/models/base.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,48 +42,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608289969797</updated>
-    </task>
-    <task id="LOCAL-00161" summary="sampling">
-      <created>1609428416902</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1609428416902</updated>
-    </task>
-    <task id="LOCAL-00162" summary="sampling">
-      <created>1609428765595</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1609428765595</updated>
-    </task>
-    <task id="LOCAL-00163" summary="sampling">
-      <created>1609429110052</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1609429110052</updated>
-    </task>
-    <task id="LOCAL-00164" summary="sampling">
-      <created>1609429223907</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1609429223907</updated>
-    </task>
-    <task id="LOCAL-00165" summary="sampling">
-      <created>1609429419525</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1609429419525</updated>
-    </task>
-    <task id="LOCAL-00166" summary="sampling">
-      <created>1609429502331</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL-00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1609429502331</updated>
     </task>
     <task id="LOCAL-00167" summary="sampling">
       <created>1609429646163</created>
@@ -387,7 +344,49 @@
       <option name="project" value="LOCAL" />
       <updated>1609511434240</updated>
     </task>
-    <option name="localTasksCounter" value="210" />
+    <task id="LOCAL-00210" summary="sampling">
+      <created>1609511975721</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1609511975721</updated>
+    </task>
+    <task id="LOCAL-00211" summary="sampling">
+      <created>1609512421604</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1609512421604</updated>
+    </task>
+    <task id="LOCAL-00212" summary="sampling">
+      <created>1609512746589</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1609512746589</updated>
+    </task>
+    <task id="LOCAL-00213" summary="sampling">
+      <created>1609513036297</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1609513036297</updated>
+    </task>
+    <task id="LOCAL-00214" summary="sampling">
+      <created>1609513294847</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1609513294847</updated>
+    </task>
+    <task id="LOCAL-00215" summary="sampling">
+      <created>1609513926986</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1609513926986</updated>
+    </task>
+    <option name="localTasksCounter" value="216" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
