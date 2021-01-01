@@ -262,7 +262,8 @@ class Trainer:
                 sample = sample[None, :, :]
                 sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
                 sample = sample.permute(0, 3, 1, 2)
-                plot_images_grid(sample,'./')
+                f_name = "./sample_epoch_" + str(self._epoch) + ".png"
+                plot_images_grid(sample,f_name)
 
                 self._summary_writer.add_images("sample", sample, self._step)
 
