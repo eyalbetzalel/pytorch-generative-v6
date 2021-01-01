@@ -196,7 +196,7 @@ class Trainer:
 
         for epoch in range(n_epochs):
             start_time = time.time()
-
+            print("------------------ Epoch = " + str(epoch) + " ------------------")
             # Train.
             for i, batch in enumerate(self._train_loader):
 
@@ -210,7 +210,7 @@ class Trainer:
                 }
                 self._summary_writer.add_scalars("loss/lr", lrs, self._step)
                 loss = self._train_one_batch(x, y)
-                print("loss = " + str(loss))
+                #print("loss = " + str(loss))
                 self._log_loss_dict(loss, training=True)
 
                 self._time_taken += time.time() - start_time
@@ -249,21 +249,23 @@ class Trainer:
 
             print("epoch " + str(self._epoch) + " out of " + str(n_epochs))
 
-            if self._epoch % 1 == 0: #self._sample_epochs == 0:
+            if self._epoch % 5 == 0: #self._sample_epochs == 0:
+                self._save_checkpoint()
 
                 ####################################################################################################################
                 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 # Mapping function from 1-ch cluster to 3-ch RGB images :
-                print("Sampling (long)")
-                self._save_checkpoint()
-                sample = self._model.sample(out_shape=[1024, 1])
-                import ipdb; ipdb.set_trace()
-                sample = torch.reshape(sample, [32,32])
-                sample = sample[None, :, :]
-                sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
-                sample = sample.permute(0, 3, 1, 2)
-                f_name = "./sample_epoch_" + str(self._epoch) + ".png"
-                plot_images_grid(sample,f_name)
+                for i in range(5):
+
+                    print("Sampling" + str(i) + "out of 5 (long)...")
+                    sample = self._model.sample(out_shape=[1024, 1])
+                    import ipdb; ipdb.set_trace()
+                    sample = torch.reshape(sample, [32,32])
+                    sample = sample[None, :, :]
+                    sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
+                    sample = sample.permute(0, 3, 1, 2)
+                    f_name = ".samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+                    plot_images_grid(sample,f_name)
 
                 self._summary_writer.add_images("sample", sample, self._step)
 
