@@ -59,7 +59,7 @@ class AutoregressiveModel(nn.Module):
             for row in range(w): # w =1
                 for col in range(h): # h = 1024
 
-                    import ipdb; ipdb.set_trace()
+                    #
 
                     # conditioned_on = torch.Size([1024, 1])
 
@@ -92,5 +92,6 @@ class AutoregressiveModel(nn.Module):
 
                     # out.shape =
                     # conditioned_on =
-
+            import ipdb;
+            ipdb.set_trace()
             return conditioned_on
