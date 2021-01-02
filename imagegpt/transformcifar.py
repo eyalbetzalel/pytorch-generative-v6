@@ -17,7 +17,6 @@ def transform_cluster_to_image(samples):
     sample_new = torch.round(127.5 * (clusters[data_tor.long()] + 1.0))
     sample_new = sample_new.permute(0, 3, 1, 2)
 
-
     return sample_new
 
 def load_data(data_path):
@@ -37,10 +36,46 @@ def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, paddi
     plt.imsave(export_img,im)
 
 
-data_path = './cifar10'
-(trX, trY), (vaX, vaY), (teX, teY) = load_data(data_path)
-sample = transform_cluster_to_image(vaX)
-log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
+def load_h5_dataset(directory):
+    print(" --------------------------------- ")
+    print("Start loading Datasat from H5DF files...")
+    data = []
+    flagOneFile = 0
+    for filename in os.listdir(directory):
+        if flagOneFile:
+            break
+        if filename.endswith(".h5"):
+            with h5py.File(filename, "r") as f:
+                a_group_key = list(f.keys())[0]
+                # Get the data
+                temp = list(f[a_group_key])
+                data.append(temp[1:])
+
+                flagOneFile = 1
+            continue
+        else:
+            continue
+    data_flat = [item for sublist in data for item in sublist]
+    data_flat = np.stack(data_flat, axis=0)
+    precent_train_test_split = 0.7
+    train = data_flat[:int(np.floor(precent_train_test_split * data_flat.shape[0])), :]
+    test = data_flat[int(np.floor(precent_train_test_split * data_flat.shape[0])) + 1:, :]
+    print(" --------------------------------- ")
+    print("Finish loading Datasat from H5DF files...")
+
+    return train, test
+
+
+# data_path = './cifar10'
+# (trX, trY), (vaX, vaY), (teX, teY) = load_data(data_path)
+# sample = transform_cluster_to_image(vaX)
+# log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test1.png'
+
+directory = "./"
+train, test = load_h5_dataset(directory)
+sample = transform_cluster_to_image(train)
+log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test'
+
 pytorch_tensor = sample[1:48,:,:,:]
 plot_images_grid(pytorch_tensor, export_img=log_dir)
 
