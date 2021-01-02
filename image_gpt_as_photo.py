@@ -4,9 +4,6 @@ import os
 import torch
 from torch.utils import tensorboard
 
-
-
-
 def load_h5_dataset(directory):
     print(" --------------------------------- ")
     print("Start loading Datasat from H5DF files...")
