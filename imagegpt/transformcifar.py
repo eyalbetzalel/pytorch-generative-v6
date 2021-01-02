@@ -35,6 +35,7 @@ def plot_images_grid(x: torch.tensor, export_img, title: str = '', nrow=8, paddi
     grid = torchvision.utils.make_grid(x, nrow=nrow, padding=padding, normalize=normalize, pad_value=pad_value)
     npgrid = grid.cpu().numpy()
     im = np.transpose(npgrid, (1, 2, 0))
+    import ipdb; ipdb.set_trace()
     plt.imsave(export_img,im)
 
 
