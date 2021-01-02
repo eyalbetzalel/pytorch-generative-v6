@@ -80,7 +80,7 @@ train, test = load_h5_dataset(directory)
 sample = transform_cluster_to_image(train)
 log_dir = './image_test/test22.png'
 
-pytorch_tensor = sample[1:48,:,:,:]
+pytorch_tensor = sample[100:148,:,:,:]
 plot_images_grid(pytorch_tensor, export_img=log_dir)
 
 
