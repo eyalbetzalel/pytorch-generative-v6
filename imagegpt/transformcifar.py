@@ -76,7 +76,7 @@ def load_h5_dataset(directory):
 directory = "./"
 train, test = load_h5_dataset(directory)
 sample = transform_cluster_to_image(train)
-log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test'
+log_dir = '/home/dsi/eyalbetzalel/pytorch-generative-v6/image_test/test22.png'
 
 pytorch_tensor = sample[1:48,:,:,:]
 plot_images_grid(pytorch_tensor, export_img=log_dir)
