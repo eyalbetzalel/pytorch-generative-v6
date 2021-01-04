@@ -98,11 +98,11 @@ class Trainer:
         self.attention_value_channels = attention_value_channels
         self.attention_key_channels = attention_key_channels
 
-        hp_str = "/ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
+        self.hp_str = "ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
             str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
             "_attk_" + str(self.attention_key_channels)
 
-        self._log_dir = (log_dir + hp_str) or tempfile.mkdtemp()
+        self._log_dir = (log_dir + "/" + self.hp_str) or tempfile.mkdtemp()
 
         self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
 
@@ -114,11 +114,9 @@ class Trainer:
         if self._epoch % self._save_checkpoint_epochs != 0:
             return
 
-        hp_str = "ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
-            str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
-            "_attk_" + str(self.attention_key_channels)
+        hp_str = self.hp_str + "_"
 
-        fname_model = hp_str + "_model_state"
+        fname_model = hp_str + "model_state"
         fname_optimizer = hp_str + "optimizer_state"
         fname_lr_scheduler = hp_str + "lr_scheduler_state"
         torch.save(self._model.state_dict(), self._path(fname_model))
