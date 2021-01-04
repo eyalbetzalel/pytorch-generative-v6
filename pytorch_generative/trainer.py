@@ -31,7 +31,7 @@ class Trainer:
         train_loader,
         eval_loader,
         save_checkpoint_epochs=1,
-        sample_epochs=None,
+        sample_epochs=1,
         sample_fn=None,
         lr_scheduler=None,
         log_dir=None,
@@ -110,6 +110,7 @@ class Trainer:
         return os.path.join(self._log_dir, file_name)
 
     def _save_checkpoint(self):
+
         if self._epoch % self._save_checkpoint_epochs != 0:
             return
 
@@ -204,7 +205,24 @@ class Trainer:
             loss = self._get_loss_dict(self.eval_one_batch(x, y))
             return {k: v.item() for k, v in loss.items()}
 
+    def _sample(self):
+        ####################################################################################################################
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        # Sampling while training :
 
+        if self._epoch % self._sample_epochs == 0:
+
+            for i in range(10):
+                print("------------------ Sampling " + str(i) + " out of 10 (long) ------------------")
+                sample = self._model.sample(out_shape=[1024, 1])
+                sample = torch.reshape(sample, [32, 32])
+                sample = sample[None, :, :]
+                sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
+                sample = sample.permute(0, 3, 1, 2)
+                f_name = "./" + self.hp_str + "/samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+                plot_images_grid(sample, f_name)
+            self._summary_writer.add_images("sample", sample, self._step)
+        ####################################################################################################################
 
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
@@ -254,6 +272,7 @@ class Trainer:
                 self._step += 1
 
             # Evaluate
+
             self._model.eval()
             total_examples, total_loss = 0, collections.defaultdict(int)
             for batch in self._eval_loader:
@@ -267,26 +286,8 @@ class Trainer:
             loss = {key: loss / total_examples for key, loss in total_loss.items()}
             self._log_loss_dict(loss, training=False)
 
-            self._epoch += 1
+            self._sample()
             self._save_checkpoint()
-
-            # Sampling :
-
-            # if self._epoch % 100 == 0: #self._sample_epochs == 0:
-            #
-            #     ####################################################################################################################
-            #     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            #     # Sampling while training :
-            #     for i in range(10):
-            #         print("------------------ Sampling " + str(i) + " out of 10 (long) ------------------")
-            #         sample = self._model.sample(out_shape=[1024, 1])
-            #         sample = torch.reshape(sample, [32,32])
-            #         sample = sample[None, :, :]
-            #         sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
-            #         sample = sample.permute(0, 3, 1, 2)
-            #         f_name = "./samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
-            #         plot_images_grid(sample,f_name)
-            #     self._summary_writer.add_images("sample", sample, self._step)
-            #     ####################################################################################################################
+            self._epoch += 1
 
         self._summary_writer.close()
