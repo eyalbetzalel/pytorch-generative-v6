@@ -110,7 +110,6 @@ class Trainer:
         return os.path.join(self._log_dir, file_name)
 
     def _save_checkpoint(self):
-        import ipdb; ipdb.set_trace()
         if self._epoch % self._save_checkpoint_epochs != 0:
             return
 
