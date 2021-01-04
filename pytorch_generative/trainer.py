@@ -30,12 +30,18 @@ class Trainer:
         optimizer,
         train_loader,
         eval_loader,
-        save_checkpoint_epochs=50,
+        save_checkpoint_epochs=1,
         sample_epochs=None,
         sample_fn=None,
         lr_scheduler=None,
         log_dir=None,
         device="cuda",
+        # Hyper parameters :
+        n_channels=64,
+        n_pixel_snail_blocks=8,
+        n_residual_blocks=2,
+        attention_value_channels=128,
+        attention_key_channels=16,
     ):
         """Initializes a new Trainer instance.
 
@@ -84,8 +90,15 @@ class Trainer:
         self._epoch = 0
         self._examples_processed = 0
         self._time_taken = 0
-
         self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
+
+        # Pass hyper-parameters :
+
+        self.n_channels = n_channels
+        self.n_pixel_snail_blocks = n_pixel_snail_blocks
+        self.n_residual_blocks = n_residual_blocks
+        self.attention_value_channels = attention_value_channels
+        self.attention_key_channels = attention_key_channels
 
     def _path(self, file_name):
         return os.path.join(self._log_dir, file_name)
@@ -95,18 +108,27 @@ class Trainer:
         if self._epoch % self._save_checkpoint_epochs != 0:
             return
 
-        torch.save(self._model.state_dict(), self._path("model_state"))
-        torch.save(self._optimizer.state_dict(), self._path("optimizer_state"))
+        hp_str = "ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
+            str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
+            "_attk_" + str(self.attention_key_channels)
+
+        hp_str = hp_str + "/" + hp_str
+
+        fname_model = hp_str + "_model_state"
+        fname_optimizer = hp_str + "optimizer_state"
+        fname_lr_scheduler = hp_str + "lr_scheduler_state"
+        torch.save(self._model.state_dict(), self._path(fname_model))
+        torch.save(self._optimizer.state_dict(), self._path(fname_optimizer))
         if self._lr_scheduler is not None:
             torch.save(
-                self._lr_scheduler.state_dict(), self._path("lr_scheduler_state")
+                self._lr_scheduler.state_dict(), self._path(fname_lr_scheduler)
             )
         # TODO(eugenhotaj): Instead of saving these internal counters one at a
         # time, maybe we can save them as a dictionary.
-        torch.save(self._step, self._path("step"))
-        torch.save(self._epoch, self._path("epoch"))
-        torch.save(self._examples_processed, self._path("examples_processed"))
-        torch.save(self._time_taken, self._path("time_taken"))
+        torch.save(self._step, self._path(hp_str + "step"))
+        torch.save(self._epoch, self._path(hp_str + "epoch"))
+        torch.save(self._examples_processed, self._path(hp_str + "examples_processed"))
+        torch.save(self._time_taken, self._path(hp_str + "time_taken"))
 
     def load_from_checkpoint(self):
         """Attempts to load Trainer state from the internal log_dir."""

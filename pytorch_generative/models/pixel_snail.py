@@ -345,6 +345,11 @@ def reproduce(n_epochs=457,
         device=device,
         sample_epochs = None,
         sample_fn=None,
+        n_channels=n_channels,
+        n_pixel_snail_blocks=n_pixel_snail_blocks,
+        n_residual_blocks=n_residual_blocks,
+        attention_value_channels=attention_value_channels,
+        attention_key_channels=attention_key_channels,
     )
 
     trainer.interleaved_train_and_eval(n_epochs)
