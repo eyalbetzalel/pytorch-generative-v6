@@ -31,13 +31,7 @@ def main(args):
     device = "cuda" if args.use_cuda else "cpu"
 
     if args.model == "pixel_snail":
-        MODEL_DICT[args.model].reproduce(
-            args.n_epochs,
-            args.batch_size,
-            args.log_dir,
-            device
-        )
-    else :
+
         MODEL_DICT[args.model].reproduce(
             args.n_epochs,
             args.batch_size,
@@ -49,6 +43,16 @@ def main(args):
             args.n_residual_blocks,
             args.attention_value_channels,
             args.attention_key_channels
+        )
+
+
+    else :
+
+        MODEL_DICT[args.model].reproduce(
+            args.n_epochs,
+            args.batch_size,
+            args.log_dir,
+            device
         )
 
 
