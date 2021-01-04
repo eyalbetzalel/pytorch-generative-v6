@@ -29,9 +29,16 @@ MODEL_DICT = {
 
 def main(args):
     device = "cuda" if args.use_cuda else "cpu"
-    MODEL_DICT[args.model].reproduce(
-        args.n_epochs, args.batch_size, args.log_dir, device
-    )
+
+    if args.model == "pixel_snail":
+        MODEL_DICT[args.model].reproduce(
+            args.n_epochs, args.batch_size, args.log_dir, device
+        )
+    else :
+        MODEL_DICT[args.model].reproduce(
+            args.n_epochs, args.batch_size, args.log_dir, device, args.n_channels, args.n_pixel_snail_blocks, args.n_residual_blocks
+        )
+
 
 
 if __name__ == "__main__":
@@ -61,7 +68,33 @@ if __name__ == "__main__":
         help="the directory where to log data",
         default="./tmp/run",
     )
-    parser.add_argument("--use_cuda", help="whether to use CUDA", action="store_true")
+    parser.add_argument(
+        "--use_cuda",
+        help="whether to use CUDA",
+        action="store_true"
+    )
+
+    parser.add_argument(
+        "--n_channels",
+        type=int,
+        help="PixelSnail - Hyper parameter",
+        default=64,
+    )
+
+    parser.add_argument(
+        "--n_pixel_snail_blocks",
+        type=int,
+        help="PixelSnail - Hyper parameter",
+        default=8,
+    )
+
+    parser.add_argument(
+        "--n_residual_blocks",
+        type=int,
+        help="PixelSnail - Hyper parameter",
+        default=2,
+    )
+
     args = parser.parse_args()
 
     main(args)

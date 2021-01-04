@@ -219,7 +219,7 @@ class PixelSNAIL(base.AutoregressiveModel):
 
         # Training --> x.shape = torch.Size([128, 3, 32, 32])
         # Sampling --> x.shape =torch.Size([1, 3, 32, 32])
-        
+
         x = x.to('cuda')
         ####################################################################################################################
 
@@ -235,7 +235,7 @@ class PixelSNAIL(base.AutoregressiveModel):
 
         return self._logsoftmax(output)
 
-def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None):
+def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None,n_channels=64,n_pixel_snail_blocks=8,n_residual_blocks=2):
     """Training script with defaults to reproduce results.
 
     The code inside this function is self contained and can be used as a top level
@@ -295,11 +295,11 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
 
         ####################################################################################################################
 
-        n_channels=64,
-        n_pixel_snail_blocks=8,
-        n_residual_blocks=2,
-        attention_value_channels=32,  # n_channels / 2
-        attention_key_channels=4,  # attention_value_channels / 8
+        n_channels=n_channels,
+        n_pixel_snail_blocks=n_pixel_snail_blocks,
+        n_residual_blocks=n_residual_blocks,
+        attention_value_channels=n_channels/2,
+        attention_key_channels=attention_value_channels/8,
     )
     optimizer = optim.Adam(model.parameters(), lr=1e-4)
     scheduler = lr_scheduler.MultiplicativeLR(optimizer, lr_lambda=lambda _: 0.999977)
