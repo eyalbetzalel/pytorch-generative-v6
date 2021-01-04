@@ -85,6 +85,7 @@ class Trainer:
         #     msg = "sample_fn cannot be None if sample_epochs is not None"
         #     assert self._sample_fn, msg
 
+
         self._step = 0
         self._epoch = 0
         self._examples_processed = 0
