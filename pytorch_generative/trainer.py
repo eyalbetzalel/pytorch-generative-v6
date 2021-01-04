@@ -76,7 +76,6 @@ class Trainer:
         self._loss_fn = loss_fn
         self._train_loader = train_loader
         self._eval_loader = eval_loader
-        self._log_dir = log_dir or tempfile.mkdtemp()
         self._save_checkpoint_epochs = save_checkpoint_epochs
         self._device = torch.device(device) if isinstance(device, str) else device
         self._model = model.to('cuda')
@@ -100,6 +99,12 @@ class Trainer:
         self.attention_value_channels = attention_value_channels
         self.attention_key_channels = attention_key_channels
 
+        hp_str = "/ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
+            str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
+            "_attk_" + str(self.attention_key_channels)
+
+        self._log_dir = (log_dir + hp_str) or tempfile.mkdtemp()
+
     def _path(self, file_name):
         return os.path.join(self._log_dir, file_name)
 
@@ -111,8 +116,6 @@ class Trainer:
         hp_str = "ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
             str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
             "_attk_" + str(self.attention_key_channels)
-
-        hp_str = hp_str + "/" + hp_str
 
         fname_model = hp_str + "_model_state"
         fname_optimizer = hp_str + "optimizer_state"
