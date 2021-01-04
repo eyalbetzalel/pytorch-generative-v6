@@ -281,8 +281,8 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
         batch_size=batch_size,
         num_workers=8,
     )
-    attention_value_channels = n_channels / 2
-    attention_key_channels = attention_value_channels / 8
+    attention_value_channels = int(n_channels / 2)
+    attention_key_channels = int(attention_value_channels / 8)
 
     model = models.PixelSNAIL(
         ####################################################################################################################
