@@ -30,8 +30,8 @@ class Trainer:
         optimizer,
         train_loader,
         eval_loader,
-        save_checkpoint_epochs=1,
-        sample_epochs=1,
+        save_checkpoint_epochs=50,
+        sample_epochs=50,
         sample_fn=None,
         lr_scheduler=None,
         log_dir=None,
@@ -236,7 +236,7 @@ class Trainer:
                 if not os.path.exists(dir):
                     os.makedirs(dir)
 
-                f_name = dir + "/" + "sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+                f_name = dir + "/" + "sample_epoch_" + str(self._epoch) + "_image_" + str(i) + ".png"
                 plot_images_grid(sample, f_name)
             self._summary_writer.add_images("sample", sample, self._step)
         ####################################################################################################################
