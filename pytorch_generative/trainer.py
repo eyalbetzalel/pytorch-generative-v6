@@ -236,7 +236,7 @@ class Trainer:
                 if not os.path.exists(cwd):
                     os.makedirs(cwd)
 
-                f_name = cwd + self.hp_str + "/samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+                f_name = cwd + "/" + "sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
                 plot_images_grid(sample, f_name)
             self._summary_writer.add_images("sample", sample, self._step)
         ####################################################################################################################
