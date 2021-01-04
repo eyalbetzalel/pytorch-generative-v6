@@ -232,11 +232,11 @@ class Trainer:
                 sample = sample.permute(0, 3, 1, 2)
 
                 cwd = os.getcwd()
-                cwd = cwd + "/" + self.hp_str + "/samples"
-                if not os.path.exists(cwd):
-                    os.makedirs(cwd)
+                dir = self._log_dir + "/samples"
+                if not os.path.exists(dir):
+                    os.makedirs(dir)
 
-                f_name = cwd + "/" + "sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+                f_name = dir + "/" + "sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
                 plot_images_grid(sample, f_name)
             self._summary_writer.add_images("sample", sample, self._step)
         ####################################################################################################################
