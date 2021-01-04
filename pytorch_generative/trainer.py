@@ -223,6 +223,9 @@ class Trainer:
         # Sampling while training :
         if self._epoch % self._sample_epochs == 0:
 
+            if not os.path.exists('./sample'):
+                os.makedirs('./sample')
+
             for i in range(10):
                 print("------------------ Sampling " + str(i) + " out of 10 (long) ------------------")
                 sample = self._model.sample(out_shape=[1024, 1])
