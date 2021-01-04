@@ -97,7 +97,7 @@ if __name__ == "__main__":
         "--n_pixel_snail_blocks",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=8,
+        default=12,
     )
 
     parser.add_argument(
