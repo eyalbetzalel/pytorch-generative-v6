@@ -223,11 +223,6 @@ class Trainer:
         # Sampling while training :
         if self._epoch % self._sample_epochs == 0:
 
-            if not os.path.exists('./sample'):
-                os.makedirs('./sample')
-
-            cwd = os.getcwd()
-
             for i in range(10):
                 print("------------------ Sampling " + str(i) + " out of 10 (long) ------------------")
                 sample = self._model.sample(out_shape=[1024, 1])
@@ -235,7 +230,13 @@ class Trainer:
                 sample = sample[None, :, :]
                 sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
                 sample = sample.permute(0, 3, 1, 2)
-                f_name = cwd + "/" + self.hp_str + "/samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+
+                cwd = os.getcwd()
+                cwd = cwd + "/" + self.hp_str + "/samples"
+                if not os.path.exists(cwd):
+                    os.makedirs(cwd)
+
+                f_name = cwd + self.hp_str + "/samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
                 plot_images_grid(sample, f_name)
             self._summary_writer.add_images("sample", sample, self._step)
         ####################################################################################################################
