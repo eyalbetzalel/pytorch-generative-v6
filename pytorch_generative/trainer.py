@@ -81,9 +81,9 @@ class Trainer:
         self._model = model.to('cuda')
         self._sample_epochs = sample_epochs
         self._sample_fn = sample_fn
-        if self._sample_epochs:
-            msg = "sample_fn cannot be None if sample_epochs is not None"
-            assert self._sample_fn, msg
+        # if self._sample_epochs:
+        #     msg = "sample_fn cannot be None if sample_epochs is not None"
+        #     assert self._sample_fn, msg
 
         self._step = 0
         self._epoch = 0
@@ -209,7 +209,6 @@ class Trainer:
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Sampling while training :
-        import ipdb; ipdb.set_trace()
         if self._epoch % self._sample_epochs == 0:
 
             for i in range(10):
