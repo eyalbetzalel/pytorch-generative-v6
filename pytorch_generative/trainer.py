@@ -30,7 +30,7 @@ class Trainer:
         optimizer,
         train_loader,
         eval_loader,
-        save_checkpoint_epochs=1,
+        save_checkpoint_epochs=50,
         sample_epochs=None,
         sample_fn=None,
         lr_scheduler=None,
@@ -210,9 +210,7 @@ class Trainer:
                 }
                 self._summary_writer.add_scalars("loss/lr", lrs, self._step)
                 loss = self._train_one_batch(x, y)
-                #print("loss = " + str(loss))
                 self._log_loss_dict(loss, training=True)
-
                 self._time_taken += time.time() - start_time
                 start_time = time.time()
                 self._summary_writer.add_scalar(
@@ -246,29 +244,25 @@ class Trainer:
             self._log_loss_dict(loss, training=False)
 
             self._epoch += 1
+            self._save_checkpoint()
 
-            print("epoch " + str(self._epoch) + " out of " + str(n_epochs))
+            # Sampling :
 
-            if self._epoch % 100 == 0: #self._sample_epochs == 0:
-                self._save_checkpoint()
-
-                ####################################################################################################################
-                # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                # Mapping function from 1-ch cluster to 3-ch RGB images :
-                for i in range(10):
-
-                    print("------------------ Sampling" + str(i) + "out of 5 (long) ------------------")
-                    sample = self._model.sample(out_shape=[1024, 1])
-                    sample = torch.reshape(sample, [32,32])
-                    sample = sample[None, :, :]
-                    sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
-                    sample = sample.permute(0, 3, 1, 2)
-                    f_name = "./samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
-                    plot_images_grid(sample,f_name)
-
-                self._summary_writer.add_images("sample", sample, self._step)
-
-                ####################################################################################################################
-
+            # if self._epoch % 100 == 0: #self._sample_epochs == 0:
+            #
+            #     ####################################################################################################################
+            #     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            #     # Sampling while training :
+            #     for i in range(10):
+            #         print("------------------ Sampling " + str(i) + " out of 10 (long) ------------------")
+            #         sample = self._model.sample(out_shape=[1024, 1])
+            #         sample = torch.reshape(sample, [32,32])
+            #         sample = sample[None, :, :]
+            #         sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
+            #         sample = sample.permute(0, 3, 1, 2)
+            #         f_name = "./samples/sample_epoch_" + str(self._epoch) + "image_" + str(i) + ".png"
+            #         plot_images_grid(sample,f_name)
+            #     self._summary_writer.add_images("sample", sample, self._step)
+            #     ####################################################################################################################
 
         self._summary_writer.close()

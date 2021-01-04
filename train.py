@@ -32,11 +32,23 @@ def main(args):
 
     if args.model == "pixel_snail":
         MODEL_DICT[args.model].reproduce(
-            args.n_epochs, args.batch_size, args.log_dir, device
+            args.n_epochs,
+            args.batch_size,
+            args.log_dir,
+            device
         )
     else :
         MODEL_DICT[args.model].reproduce(
-            args.n_epochs, args.batch_size, args.log_dir, device, args.n_channels, args.n_pixel_snail_blocks, args.n_residual_blocks
+            args.n_epochs,
+            args.batch_size,
+            args.log_dir,
+            device,
+            # PixelSnail hyper-parameters :
+            args.n_channels,
+            args.n_pixel_snail_blocks,
+            args.n_residual_blocks,
+            args.attention_value_channels,
+            args.attention_key_channels
         )
 
 
@@ -78,7 +90,7 @@ if __name__ == "__main__":
         "--n_channels",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=64,
+        default=256,
     )
 
     parser.add_argument(
@@ -92,7 +104,21 @@ if __name__ == "__main__":
         "--n_residual_blocks",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=2,
+        default=4,
+    )
+
+    parser.add_argument(
+        "--attention_value_channels",
+        type=int,
+        help="PixelSnail - Hyper parameter",
+        default=128,
+    )
+
+    parser.add_argument(
+        "--attention_key_channels",
+        type=int,
+        help="PixelSnail - Hyper parameter",
+        default=16,
     )
 
     args = parser.parse_args()

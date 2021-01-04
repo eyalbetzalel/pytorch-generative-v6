@@ -235,7 +235,17 @@ class PixelSNAIL(base.AutoregressiveModel):
 
         return self._logsoftmax(output)
 
-def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", debug_loader=None,n_channels=64,n_pixel_snail_blocks=8,n_residual_blocks=2):
+def reproduce(n_epochs=457,
+              batch_size=128,
+              log_dir="/tmp/run",
+              device="cuda",
+              debug_loader=None,
+              n_channels=64,
+              n_pixel_snail_blocks=8,
+              n_residual_blocks=2,
+              attention_value_channels = 128,
+              attention_key_channels = 16):
+
     """Training script with defaults to reproduce results.
 
     The code inside this function is self contained and can be used as a top level
@@ -281,8 +291,8 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
         batch_size=batch_size,
         num_workers=8,
     )
-    attention_value_channels = int(n_channels / 2)
-    attention_key_channels = int(attention_value_channels / 8)
+    attention_value_channels = attention_value_channels
+    attention_key_channels = attention_key_channels
 
     model = models.PixelSNAIL(
         ####################################################################################################################
