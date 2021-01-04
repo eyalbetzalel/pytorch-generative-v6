@@ -89,7 +89,6 @@ class Trainer:
         self._epoch = 0
         self._examples_processed = 0
         self._time_taken = 0
-        self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
 
         # Pass hyper-parameters :
 
@@ -104,6 +103,8 @@ class Trainer:
             "_attk_" + str(self.attention_key_channels)
 
         self._log_dir = (log_dir + hp_str) or tempfile.mkdtemp()
+
+        self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
 
     def _path(self, file_name):
         return os.path.join(self._log_dir, file_name)
