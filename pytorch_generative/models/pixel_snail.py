@@ -281,6 +281,8 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
         batch_size=batch_size,
         num_workers=8,
     )
+    attention_value_channels = n_channels / 2
+    attention_key_channels = attention_value_channels / 8
 
     model = models.PixelSNAIL(
         ####################################################################################################################
@@ -298,8 +300,8 @@ def reproduce(n_epochs=457, batch_size=128, log_dir="/tmp/run", device="cuda", d
         n_channels=n_channels,
         n_pixel_snail_blocks=n_pixel_snail_blocks,
         n_residual_blocks=n_residual_blocks,
-        attention_value_channels=n_channels/2,
-        attention_key_channels=attention_value_channels/8,
+        attention_value_channels=attention_value_channels,
+        attention_key_channels=attention_key_channels,
     )
     optimizer = optim.Adam(model.parameters(), lr=1e-4)
     scheduler = lr_scheduler.MultiplicativeLR(optimizer, lr_lambda=lambda _: 0.999977)
