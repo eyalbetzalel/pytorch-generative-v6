@@ -260,6 +260,7 @@ def reproduce(n_epochs=457,
             evaluation loaders if not 'None'. Do not use unless you're writing unit
             tests.
     """
+    import ipdb; ipdb.set_trace()
     from torch import optim
     from torch.nn import functional as F
     from torch.optim import lr_scheduler
