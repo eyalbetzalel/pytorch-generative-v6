@@ -294,9 +294,9 @@ class Trainer:
                     total_loss[key] += loss * n_examples
             loss = {key: loss / total_examples for key, loss in total_loss.items()}
             self._log_loss_dict(loss, training=False)
-
-            self._sample()
-            self._save_checkpoint()
+            if self._epoch % self._sample_epochs == 0:
+                self._sample()
+                self._save_checkpoint()
             self._epoch += 1
 
         self._summary_writer.close()
