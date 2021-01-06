@@ -37,11 +37,11 @@ class Trainer:
         log_dir=None,
         device="cuda",
         # Hyper parameters :
-        n_channels=64,
-        n_pixel_snail_blocks=8,
+        n_channels=2,
+        n_pixel_snail_blocks=2,
         n_residual_blocks=2,
-        attention_value_channels=128,
-        attention_key_channels=16,
+        attention_value_channels=2,
+        attention_key_channels=2,
     ):
         """Initializes a new Trainer instance.
 
@@ -103,7 +103,7 @@ class Trainer:
             str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
             "_attk_" + str(self.attention_key_channels)
 
-        self._log_dir = (log_dir + "/" + self.hp_str) or tempfile.mkdtemp()
+        self._log_dir = (log_dir + "/" + self.hp_str) # or tempfile.mkdtemp()
 
         self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
 

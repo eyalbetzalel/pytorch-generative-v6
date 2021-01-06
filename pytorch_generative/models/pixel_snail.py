@@ -240,11 +240,11 @@ def reproduce(n_epochs=457,
               log_dir="/tmp/run",
               device="cuda",
               debug_loader=None,
-              n_channels=64,
-              n_pixel_snail_blocks=8,
-              n_residual_blocks=2,
-              attention_value_channels = 128,
-              attention_key_channels = 16):
+              n_channels=1,
+              n_pixel_snail_blocks=1,
+              n_residual_blocks=1,
+              attention_value_channels = 1,
+              attention_key_channels = 1):
 
     """Training script with defaults to reproduce results.
 
@@ -334,6 +334,7 @@ def reproduce(n_epochs=457,
         return loss
 
     _model = model.to(device)
+    import ipdb; ipdb.set_trace()
     trainer = trainer.Trainer(
         model=model,
         loss_fn=loss_fn,

@@ -94,35 +94,35 @@ if __name__ == "__main__":
         "--n_channels",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=256,
+        default=3,
     )
 
     parser.add_argument(
         "--n_pixel_snail_blocks",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=12,
+        default=3,
     )
 
     parser.add_argument(
         "--n_residual_blocks",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=4,
+        default=3,
     )
 
     parser.add_argument(
         "--attention_value_channels",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=128,
+        default=3,
     )
 
     parser.add_argument(
         "--attention_key_channels",
         type=int,
         help="PixelSnail - Hyper parameter",
-        default=16,
+        default=3,
     )
 
     args = parser.parse_args()
