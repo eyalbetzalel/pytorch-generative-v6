@@ -31,7 +31,6 @@ def main(args):
     device = "cuda" if args.use_cuda else "cpu"
 
     if args.model == "pixel_snail":
-        import ipdb; ipdb.set_trace()
         MODEL_DICT[args.model].reproduce(
             args.n_epochs,
             args.batch_size,
