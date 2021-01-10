@@ -102,7 +102,7 @@ class Trainer:
         self.hp_str = "ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
             str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
             "_attk_" + str(self.attention_key_channels)
-        self._log_dir = (log_dir + "/" + self.hp_str) # or tempfile.mkdtemp()
+        self._log_dir = (log_dir + "/" + self.hp_str + "_testEval") # or tempfile.mkdtemp()
         self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
         self.evalFlag = evalFlag
 
@@ -250,9 +250,9 @@ class Trainer:
             # Train.
             for i, batch in enumerate(self._train_loader):
 
-                # if self.evalFlag:
-                #     import ipdb; ipdb.set_trace()
-                # import ipdb; ipdb.set_trace()
+                if self.evalFlag:
+                    import ipdb; ipdb.set_trace()
+                import ipdb; ipdb.set_trace()
 
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
