@@ -134,6 +134,7 @@ class Trainer:
 
     def load_from_checkpoint(self):
         """Attempts to load Trainer state from the internal log_dir."""
+        import ipdb; ipdb.set_trace()
         self._model.load_state_dict(torch.load(self._path("model_state")))
         self._optimizer.load_state_dict(torch.load(self._path("optimizer_state")))
         if self._lr_scheduler is not None:
@@ -250,10 +251,9 @@ class Trainer:
 
             # Evaluate
 
-            # if self.evalFlag:
+            if self.evalFlag:
                 # Load Model
-
-                # load_from_checkpoint() # Fix path
+                self.load_from_checkpoint() # Fix path
 
             # Train.
 
@@ -296,7 +296,6 @@ class Trainer:
                 x, y = x.to('cuda'), y.to('cuda')
                 n_examples = x.shape[0]
                 total_examples += n_examples
-                import ipdb; ipdb.set_trace()
                 for key, loss in self._eval_one_batch(x, y).items():
                     total_loss[key] += loss * n_examples
             loss = {key: loss / total_examples for key, loss in total_loss.items()}
