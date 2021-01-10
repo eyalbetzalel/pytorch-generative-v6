@@ -36,12 +36,17 @@ def main(args):
             args.batch_size,
             args.log_dir,
             device,
+
             # PixelSnail hyper-parameters :
             args.n_channels,
             args.n_pixel_snail_blocks,
             args.n_residual_blocks,
             args.attention_value_channels,
-            args.attention_key_channels
+            args.attention_key_channels,
+
+            # Evaluation Flag:
+            args.eval
+
         )
 
 
@@ -122,6 +127,12 @@ if __name__ == "__main__":
         type=int,
         help="PixelSnail - Hyper parameter",
         default=3,
+    )
+
+    parser.add_argument(
+        "--eval",
+        help="Evaluation mode",
+        action="store_true"
     )
 
     args = parser.parse_args()

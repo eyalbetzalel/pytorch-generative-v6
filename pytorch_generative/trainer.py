@@ -30,7 +30,7 @@ class Trainer:
         optimizer,
         train_loader,
         eval_loader,
-        save_checkpoint_epochs=1,
+        save_checkpoint_epochs=50,
         sample_epochs=50,
         sample_fn=None,
         lr_scheduler=None,
@@ -42,6 +42,7 @@ class Trainer:
         n_residual_blocks=2,
         attention_value_channels=2,
         attention_key_channels=2,
+        evalFlag = False,
     ):
         """Initializes a new Trainer instance.
 
@@ -98,14 +99,12 @@ class Trainer:
         self.n_residual_blocks = n_residual_blocks
         self.attention_value_channels = attention_value_channels
         self.attention_key_channels = attention_key_channels
-
         self.hp_str = "ep_" + str(self._epoch) + "_ch_" + str(self.n_channels) + "_psb_" + str(self.n_pixel_snail_blocks) + "_resb_" + \
             str(self.n_residual_blocks) + "_atval_" + str(self.attention_value_channels) + \
             "_attk_" + str(self.attention_key_channels)
-
         self._log_dir = (log_dir + "/" + self.hp_str) # or tempfile.mkdtemp()
-
         self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
+        self.evalFlag = evalFlag
 
     def _path(self, file_name):
         return os.path.join(self._log_dir, file_name)
@@ -250,6 +249,10 @@ class Trainer:
             print("------------------ Epoch = " + str(epoch) + " ------------------")
             # Train.
             for i, batch in enumerate(self._train_loader):
+
+                # if self.evalFlag:
+                #     import ipdb; ipdb.set_trace()
+                # import ipdb; ipdb.set_trace()
 
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
