@@ -30,7 +30,7 @@ class Trainer:
         optimizer,
         train_loader,
         eval_loader,
-        save_checkpoint_epochs=50,
+        save_checkpoint_epochs=1,
         sample_epochs=50,
         sample_fn=None,
         lr_scheduler=None,
