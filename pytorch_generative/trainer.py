@@ -254,6 +254,7 @@ class Trainer:
                     import ipdb; ipdb.set_trace()
                 import ipdb; ipdb.set_trace()
 
+
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
                 x, y = x.to('cuda'), y.to('cuda')
