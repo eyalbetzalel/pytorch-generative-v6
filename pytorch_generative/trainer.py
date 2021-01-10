@@ -247,7 +247,16 @@ class Trainer:
         for epoch in range(n_epochs):
             start_time = time.time()
             print("------------------ Epoch = " + str(epoch) + " ------------------")
+
+            # Evaluate
+
+            if self.evalFlag:
+                # Load Model
+                import ipdb; ipdb.set_trace()
+                load_from_checkpoint() # Fix path
+
             # Train.
+
             for i, batch in enumerate(self._train_loader):
 
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
@@ -278,14 +287,6 @@ class Trainer:
                 )
                 self._summary_writer.add_scalar("progress/step", self._step, self._step)
                 self._step += 1
-
-            # Evaluate
-
-            if self.evalFlag:
-                # Load Model
-                import ipdb; ipdb.set_trace()
-                load_from_checkpoint() # Fix path
-
 
             self._model.eval()
             total_examples, total_loss = 0, collections.defaultdict(int)
