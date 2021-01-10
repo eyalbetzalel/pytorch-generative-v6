@@ -250,11 +250,6 @@ class Trainer:
             # Train.
             for i, batch in enumerate(self._train_loader):
 
-                if self.evalFlag:
-                    import ipdb; ipdb.set_trace()
-                import ipdb; ipdb.set_trace()
-
-
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
                 x, y = x.to('cuda'), y.to('cuda')
@@ -285,6 +280,12 @@ class Trainer:
                 self._step += 1
 
             # Evaluate
+
+            if self.evalFlag:
+                # Load Model
+                import ipdb; ipdb.set_trace()
+                load_from_checkpoint() # Fix path
+
 
             self._model.eval()
             total_examples, total_loss = 0, collections.defaultdict(int)
