@@ -115,7 +115,7 @@ class Trainer:
         if self._epoch % self._save_checkpoint_epochs != 0:
             return
 
-        hp_str = self.hp_str + "_"
+        hp_str = self.hp_str + "_epoch_" + str(self._epoch) + "_"
 
         fname_model = hp_str + "model_state"
         fname_optimizer = hp_str + "optimizer_state"
