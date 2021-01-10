@@ -254,11 +254,16 @@ class Trainer:
             # Evaluate
 
             if self.evalFlag:
+
                 # Load Model
                 self.load_from_checkpoint() # Fix path
                 self._model.eval()
                 total_examples, total_loss = 0, collections.defaultdict(int)
-                import ipdb; ipdb.set_trace()
+
+                eval_results_arr = []
+
+                # run evaluation on test set :
+
                 for batch in self._eval_loader:
                     batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                     x, y = batch
@@ -267,6 +272,31 @@ class Trainer:
                     total_examples += n_examples
                     for key, loss in self._eval_one_batch(x, y).items():
                         total_loss[key] += loss * n_examples
+
+                    sample = x.cpu().numpy()
+                    tuple = (sample, loss)
+                    eval_results_arr.append(tuple)
+
+                # run evaluation on train set :
+
+                for i, batch in enumerate(self._train_loader):
+                    batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+                    x, y = batch
+                    x, y = x.to('cuda'), y.to('cuda')
+                    n_examples = x.shape[0]
+                    total_examples += n_examples
+                    for key, loss in self._eval_one_batch(x, y).items():
+                        total_loss[key] += loss * n_examples
+
+                    sample = x.cpu().numpy()
+                    tuple = (sample, loss)
+                    eval_results_arr.append(tuple)
+
+                import pickle
+                pickle.dump(eval_results_arr, open(self.hp_str + "_eval.p", "wb"))
+                import ipdb; ipdb.set_trace()
+                break
+
                 loss = {key: loss / total_examples for key, loss in total_loss.items()}
                 self._log_loss_dict(loss, training=False)
 
