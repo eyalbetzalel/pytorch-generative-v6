@@ -137,16 +137,16 @@ class Trainer:
     def load_from_checkpoint(self):
         """Attempts to load Trainer state from the internal log_dir."""
         import ipdb; ipdb.set_trace()
-        self._model.load_state_dict(torch.load(self._path(self.hp_str + "model_state")))
-        self._optimizer.load_state_dict(torch.load(self._path("optimizer_state")))
+        self._model.load_state_dict(torch.load(self._path(self.hp_str + "_model_state")))
+        self._optimizer.load_state_dict(torch.load(self._path(self.hp_str + "_optimizer_state")))
         if self._lr_scheduler is not None:
             self._lr_scheduler.load_state_dict(
-                torch.load(self._path("lr_scheduler_state"))
+                torch.load(self._path(self.hp_str + "_lr_scheduler_state"))
             )
-        self._step = torch.load(self._path("step"))
-        self._epoch = torch.load(self._path("epoch"))
-        self._examples_processed = torch.load(self._path("examples_processed"))
-        self._time_taken = torch.load(self._path("time_taken"))
+        self._step = torch.load(self._path(self.hp_str + "_step"))
+        self._epoch = torch.load(self._path(self.hp_str + "_epoch"))
+        self._examples_processed = torch.load(self._path(self.hp_str + "_examples_processed"))
+        self._time_taken = torch.load(self._path(self.hp_str + "_time_taken"))
         # NOTE(eugenhotaj): We need to replace the SummaryWriter and ensure any
         # logs written after the last saved checkpoint are purged.
         self._summary_writer.close()
