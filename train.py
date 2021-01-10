@@ -34,7 +34,7 @@ def main(args):
         MODEL_DICT[args.model].reproduce(
             args.n_epochs,
             args.batch_size,
-            args.log-dir,
+            args.log_dir,
             device,
 
             # PixelSnail hyper-parameters :
@@ -46,7 +46,7 @@ def main(args):
 
             # Evaluation Flag:
             args.eval,
-            args.eval-dir
+            args.eval_dir
         )
 
 
@@ -83,14 +83,14 @@ if __name__ == "__main__":
         default=128,
     )
     parser.add_argument(
-        "--log-dir",
+        "--log_dir",
         type=str,
         help="the directory where to log data",
         default="./tmp/run",
     )
 
     parser.add_argument(
-        "--eval-dir",
+        "--eval_dir",
         type=str,
         help="the directory where to log data",
         default="./tmp/run",
