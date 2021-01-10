@@ -283,7 +283,6 @@ class Trainer:
                     batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                     x, y = batch
                     x, y = x.to('cuda'), y.to('cuda')
-                    import ipdb; ipdb.set_trace()
                     n_examples = x.shape[0]
                     total_examples += n_examples
                     for key, loss in self._eval_one_batch(x, y).items():
