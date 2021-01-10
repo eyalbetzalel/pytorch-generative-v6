@@ -250,10 +250,10 @@ class Trainer:
 
             # Evaluate
 
-            if self.evalFlag:
+            # if self.evalFlag:
                 # Load Model
-                import ipdb; ipdb.set_trace()
-                load_from_checkpoint() # Fix path
+
+                # load_from_checkpoint() # Fix path
 
             # Train.
 
@@ -296,6 +296,7 @@ class Trainer:
                 x, y = x.to('cuda'), y.to('cuda')
                 n_examples = x.shape[0]
                 total_examples += n_examples
+                import ipdb; ipdb.set_trace()
                 for key, loss in self._eval_one_batch(x, y).items():
                     total_loss[key] += loss * n_examples
             loss = {key: loss / total_examples for key, loss in total_loss.items()}
