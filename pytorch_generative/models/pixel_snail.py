@@ -244,7 +244,8 @@ def reproduce(n_epochs=457,
               n_residual_blocks=1,
               attention_value_channels = 1,
               attention_key_channels = 1,
-              evalFlag = False):
+              evalFlag = False,
+              evaldir = "/tmp/run"):
 
     """Training script with defaults to reproduce results.
 
@@ -350,7 +351,8 @@ def reproduce(n_epochs=457,
         n_residual_blocks=n_residual_blocks,
         attention_value_channels=attention_value_channels,
         attention_key_channels=attention_key_channels,
-        evalFlag = evalFlag
+        evalFlag=evalFlag,
+        evaldir=evaldir
     )
 
     trainer.interleaved_train_and_eval(n_epochs)

@@ -34,7 +34,7 @@ def main(args):
         MODEL_DICT[args.model].reproduce(
             args.n_epochs,
             args.batch_size,
-            args.log_dir,
+            args.log-dir,
             device,
 
             # PixelSnail hyper-parameters :
@@ -45,8 +45,8 @@ def main(args):
             args.attention_key_channels,
 
             # Evaluation Flag:
-            args.eval
-
+            args.eval,
+            args.eval-dir
         )
 
 
@@ -88,6 +88,14 @@ if __name__ == "__main__":
         help="the directory where to log data",
         default="./tmp/run",
     )
+
+    parser.add_argument(
+        "--eval-dir",
+        type=str,
+        help="the directory where to log data",
+        default="./tmp/run",
+    )
+
     parser.add_argument(
         "--use_cuda",
         help="whether to use CUDA",

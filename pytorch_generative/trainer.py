@@ -42,7 +42,8 @@ class Trainer:
         n_residual_blocks=2,
         attention_value_channels=2,
         attention_key_channels=2,
-        evalFlag = False,
+        evalFlag=False,
+        evaldir=None,
     ):
         """Initializes a new Trainer instance.
 
@@ -105,9 +106,10 @@ class Trainer:
         self._log_dir = (log_dir + "/" + self.hp_str + "_testEval") # or tempfile.mkdtemp()
         self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
         self.evalFlag = evalFlag
+        self.evaldir = evaldir
 
     def _path(self, file_name):
-        return os.path.join(self._log_dir, file_name)
+        return os.path.join(self.evaldir, file_name)
 
     def _save_checkpoint(self):
 
@@ -135,7 +137,7 @@ class Trainer:
     def load_from_checkpoint(self):
         """Attempts to load Trainer state from the internal log_dir."""
         import ipdb; ipdb.set_trace()
-        self._model.load_state_dict(torch.load(self._path(self.hp_str + "_model_state")))
+        self._model.load_state_dict(torch.load(self._path(self.hp_str + "model_state")))
         self._optimizer.load_state_dict(torch.load(self._path("optimizer_state")))
         if self._lr_scheduler is not None:
             self._lr_scheduler.load_state_dict(
