@@ -244,7 +244,7 @@ def reproduce(n_epochs=457,
               n_residual_blocks=1,
               attention_value_channels = 1,
               attention_key_channels = 1,
-              evalFlag = Flase):
+              evalFlag = False):
 
     """Training script with defaults to reproduce results.
 
