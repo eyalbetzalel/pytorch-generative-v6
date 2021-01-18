@@ -109,7 +109,7 @@ class Trainer:
         self.evaldir = evaldir
 
     def _path(self, file_name):
-        return os.path.join(self.evaldir, file_name)
+        return os.path.join(self._log_dir, file_name)
 
     def _save_checkpoint(self):
 
