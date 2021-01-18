@@ -243,27 +243,96 @@ class Trainer:
             self._summary_writer.add_images("sample", sample, self._step)
         ####################################################################################################################
 
+    def _eval_full_model(self):
+        # Evaluate full model:
+        # Load Model
+        self.load_from_checkpoint()  # Fix path
+        self._model.eval()
+        total_examples, total_loss = 0, collections.defaultdict(int)
+
+        eval_results_arr = []
+
+        # run evaluation on test set :
+
+        for batch in self._eval_loader:
+            batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+            x, y = batch
+            x, y = x.to('cuda'), y.to('cuda')
+            n_examples = x.shape[0]
+            total_examples += n_examples
+            for key, loss in self._eval_one_batch(x, y).items():
+                total_loss[key] += loss * n_examples
+
+            sample = x.cpu().numpy()
+            x_loss = (sample, loss)
+            eval_results_arr.append(x_loss)
+
+        # run evaluation on train set :
+
+        for i, batch in enumerate(self._train_loader):
+            batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+            x, y = batch
+            x, y = x.to('cuda'), y.to('cuda')
+            n_examples = x.shape[0]
+            total_examples += n_examples
+            for key, loss in self._eval_one_batch(x, y).items():
+                total_loss[key] += loss * n_examples
+
+            sample = x.cpu().numpy()
+            x_loss = (sample, loss)
+            eval_results_arr.append(x_loss)
+
+        import pickle
+        pickle.dump(eval_results_arr, open(self.hp_str + "_eval.p", "wb"))
+        print("-- Finish Evaluating Model --")
+
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
 
+        if self.evalFlag:
+            self._eval_full_model()
 
-        for epoch in range(n_epochs):
-            start_time = time.time()
-            print("------------------ Epoch = " + str(epoch) + " ------------------")
+        else:
+            for epoch in range(n_epochs):
 
-            # Evaluate
+                start_time = time.time()
+                print("------------------ Epoch = " + str(epoch) + " ------------------")
 
-            if self.evalFlag:
+                # Train:
+                for i, batch in enumerate(self._train_loader):
 
-                # Load Model
-                self.load_from_checkpoint() # Fix path
+                    batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+                    x, y = batch
+                    x, y = x.to('cuda'), y.to('cuda')
+                    self._examples_processed += x.shape[0]
+                    lrs = {
+                        f"group_{i}": param["lr"]
+                        for i, param in enumerate(self._optimizer.param_groups)
+                    }
+                    self._summary_writer.add_scalars("loss/lr", lrs, self._step)
+                    loss = self._train_one_batch(x, y)
+                    self._log_loss_dict(loss, training=True)
+                    self._time_taken += time.time() - start_time
+                    start_time = time.time()
+                    self._summary_writer.add_scalar(
+                        "speed/examples_per_sec",
+                        self._examples_processed / self._time_taken,
+                        self._step,
+                    )
+                    self._summary_writer.add_scalar(
+                        "speed/millis_per_example",
+                        self._time_taken / self._examples_processed * 1000,
+                        self._step,
+                    )
+                    self._summary_writer.add_scalar(
+                        "progress/epoch", self._epoch, self._step
+                    )
+                    self._summary_writer.add_scalar("progress/step", self._step, self._step)
+                    self._step += 1
+
+                # Evaluate epoch:
                 self._model.eval()
                 total_examples, total_loss = 0, collections.defaultdict(int)
-
-                eval_results_arr = []
-
-                # run evaluation on test set :
-
                 for batch in self._eval_loader:
                     batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                     x, y = batch
@@ -272,82 +341,13 @@ class Trainer:
                     total_examples += n_examples
                     for key, loss in self._eval_one_batch(x, y).items():
                         total_loss[key] += loss * n_examples
-
-                    sample = x.cpu().numpy()
-                    x_loss = (sample, loss)
-                    eval_results_arr.append(x_loss)
-
-                # run evaluation on train set :
-
-                for i, batch in enumerate(self._train_loader):
-                    batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                    x, y = batch
-                    x, y = x.to('cuda'), y.to('cuda')
-                    n_examples = x.shape[0]
-                    total_examples += n_examples
-                    for key, loss in self._eval_one_batch(x, y).items():
-                        total_loss[key] += loss * n_examples
-
-                    sample = x.cpu().numpy()
-                    x_loss = (sample, loss)
-                    eval_results_arr.append(x_loss)
-
-                import pickle
-                pickle.dump(eval_results_arr, open(self.hp_str + "_eval.p", "wb"))
-                import ipdb; ipdb.set_trace()
-                break
-
                 loss = {key: loss / total_examples for key, loss in total_loss.items()}
                 self._log_loss_dict(loss, training=False)
 
-            # Train.
-
-            for i, batch in enumerate(self._train_loader):
-
-                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                x, y = batch
-                x, y = x.to('cuda'), y.to('cuda')
-                self._examples_processed += x.shape[0]
-                lrs = {
-                    f"group_{i}": param["lr"]
-                    for i, param in enumerate(self._optimizer.param_groups)
-                }
-                self._summary_writer.add_scalars("loss/lr", lrs, self._step)
-                loss = self._train_one_batch(x, y)
-                self._log_loss_dict(loss, training=True)
-                self._time_taken += time.time() - start_time
-                start_time = time.time()
-                self._summary_writer.add_scalar(
-                    "speed/examples_per_sec",
-                    self._examples_processed / self._time_taken,
-                    self._step,
-                )
-                self._summary_writer.add_scalar(
-                    "speed/millis_per_example",
-                    self._time_taken / self._examples_processed * 1000,
-                    self._step,
-                )
-                self._summary_writer.add_scalar(
-                    "progress/epoch", self._epoch, self._step
-                )
-                self._summary_writer.add_scalar("progress/step", self._step, self._step)
-                self._step += 1
-
-            self._model.eval()
-            total_examples, total_loss = 0, collections.defaultdict(int)
-            for batch in self._eval_loader:
-                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                x, y = batch
-                x, y = x.to('cuda'), y.to('cuda')
-                n_examples = x.shape[0]
-                total_examples += n_examples
-                for key, loss in self._eval_one_batch(x, y).items():
-                    total_loss[key] += loss * n_examples
-            loss = {key: loss / total_examples for key, loss in total_loss.items()}
-            self._log_loss_dict(loss, training=False)
-            if self._epoch % self._sample_epochs == 0:
-                self._sample()
+                # Sample / Save cp:
                 self._save_checkpoint()
-            self._epoch += 1
+                if self._epoch % self._sample_epochs == 0:
+                    self._sample()
+                self._epoch += 1
 
-        self._summary_writer.close()
+            self._summary_writer.close()
