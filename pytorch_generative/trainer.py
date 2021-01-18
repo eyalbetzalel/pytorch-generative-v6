@@ -249,7 +249,7 @@ class Trainer:
         # Load Model
         for epoch in range(0,251,50):
             print(epoch)
-            self.hp_str = self.hp_str + "_epoch_" + str(epoch) +
+            self.hp_str = self.hp_str + "_epoch_" + str(epoch)
 
             self.load_from_checkpoint()
             self._model.eval()
