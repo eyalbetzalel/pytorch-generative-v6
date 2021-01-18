@@ -246,15 +246,18 @@ class Trainer:
     def _eval_full_model(self):
         # Evaluate full model:
         # Load Model
-        self.load_from_checkpoint()  # Fix path
+        self.load_from_checkpoint()
         self._model.eval()
         total_examples, total_loss = 0, collections.defaultdict(int)
 
         eval_results_arr = []
 
         # run evaluation on test set :
+        i = 0
 
         for batch in self._eval_loader:
+
+            print(str(i) + " Out of : " + str(len(self._eval_loader)))
             batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
             x, y = batch
             x, y = x.to('cuda'), y.to('cuda')
@@ -266,11 +269,11 @@ class Trainer:
             sample = x.cpu().numpy()
             x_loss = (sample, loss)
             eval_results_arr.append(x_loss)
-            import ipdb; ipdb.set_trace()
 
         # run evaluation on train set :
 
         for i, batch in enumerate(self._train_loader):
+            print(str(i) + " Out of : " + str(len(self._train_loader)))
             batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
             x, y = batch
             x, y = x.to('cuda'), y.to('cuda')
@@ -284,7 +287,7 @@ class Trainer:
             eval_results_arr.append(x_loss)
 
         import pickle
-        pickle.dump(eval_results_arr, open(self.hp_str + "_eval.p", "wb"))
+        pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
         print("-- Finish Evaluating Model --")
 
     def interleaved_train_and_eval(self, n_epochs):
