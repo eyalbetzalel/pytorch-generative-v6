@@ -244,51 +244,58 @@ class Trainer:
         ####################################################################################################################
 
     def _eval_full_model(self):
+
         # Evaluate full model:
         # Load Model
-        self.load_from_checkpoint()
-        self._model.eval()
-        total_examples, total_loss = 0, collections.defaultdict(int)
+        for epoch in range(0,251,50):
+            print(epoch)
+            self.hp_str = self.hp_str + "_epoch_" + str(epoch) + "_"
 
-        eval_results_arr = []
+            self.load_from_checkpoint()
+            self._model.eval()
+            total_examples, total_loss = 0, collections.defaultdict(int)
 
-        # run evaluation on test set :
-        i = 0
+            eval_results_arr = []
 
-        for batch in self._eval_loader:
+            # run evaluation on test set :
+            k = 0
 
-            print(str(i) + " Out of : " + str(len(self._eval_loader)))
-            batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-            x, y = batch
-            x, y = x.to('cuda'), y.to('cuda')
-            n_examples = x.shape[0]
-            total_examples += n_examples
-            for key, loss in self._eval_one_batch(x, y).items():
-                total_loss[key] += loss * n_examples
+            for batch in self._eval_loader:
+                k+=1
+                print(str(k) + " Out of : " + str(len(self._eval_loader)))
+                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+                x, y = batch
+                x, y = x.to('cuda'), y.to('cuda')
+                n_examples = x.shape[0]
+                total_examples += n_examples
+                for key, loss in self._eval_one_batch(x, y).items():
+                    total_loss[key] += loss * n_examples
 
-            sample = x.cpu().numpy()
-            x_loss = (sample, loss)
-            eval_results_arr.append(x_loss)
+                sample = x.cpu().numpy()
+                x_loss = (sample, loss)
+                eval_results_arr.append(x_loss)
 
-        # run evaluation on train set :
+            # run evaluation on train set :
+            k=0
 
-        for i, batch in enumerate(self._train_loader):
-            print(str(i) + " Out of : " + str(len(self._train_loader)))
-            batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-            x, y = batch
-            x, y = x.to('cuda'), y.to('cuda')
-            n_examples = x.shape[0]
-            total_examples += n_examples
-            for key, loss in self._eval_one_batch(x, y).items():
-                total_loss[key] += loss * n_examples
+            for i, batch in enumerate(self._train_loader):
+                k += 1
+                print(str(k) + " Out of : " + str(len(self._train_loader)))
+                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+                x, y = batch
+                x, y = x.to('cuda'), y.to('cuda')
+                n_examples = x.shape[0]
+                total_examples += n_examples
+                for key, loss in self._eval_one_batch(x, y).items():
+                    total_loss[key] += loss * n_examples
 
-            sample = x.cpu().numpy()
-            x_loss = (sample, loss)
-            eval_results_arr.append(x_loss)
+                sample = x.cpu().numpy()
+                x_loss = (sample, loss)
+                eval_results_arr.append(x_loss)
 
-        import pickle
-        pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
-        print("-- Finish Evaluating Model --")
+            import pickle
+            pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
+            print("-- Finish Evaluating Model --")
 
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
