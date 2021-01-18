@@ -258,11 +258,9 @@ class Trainer:
             eval_results_arr = []
 
             # run evaluation on test set :
-            k = 0
 
             for batch in self._eval_loader:
-                k+=1
-                print(str(k) + " Out of : " + str(len(self._eval_loader)))
+
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
                 x, y = x.to('cuda'), y.to('cuda')
@@ -276,11 +274,10 @@ class Trainer:
                 eval_results_arr.append(x_loss)
 
             # run evaluation on train set :
-            k=0
+
 
             for i, batch in enumerate(self._train_loader):
-                k += 1
-                print(str(k) + " Out of : " + str(len(self._train_loader)))
+
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
                 x, y = x.to('cuda'), y.to('cuda')
