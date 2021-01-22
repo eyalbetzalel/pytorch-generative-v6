@@ -270,9 +270,11 @@ class Trainer:
                 for key, loss in self._eval_one_batch(x, y).items():
                     total_loss[key] += loss * n_examples
 
-                sample = x.cpu().numpy()
-                x_loss = (sample, loss)
-                eval_results_arr.append(x_loss)
+                # sample = x.cpu().numpy()
+                # x_loss = (sample, loss)
+                # eval_results_arr.append(x_loss)
+
+                eval_results_arr.append(loss)
 
             # run evaluation on train set :
 
@@ -287,9 +289,11 @@ class Trainer:
                 for key, loss in self._eval_one_batch(x, y).items():
                     total_loss[key] += loss * n_examples
 
-                sample = x.cpu().numpy()
-                x_loss = (sample, loss)
-                eval_results_arr.append(x_loss)
+                # sample = x.cpu().numpy()
+                # x_loss = (sample, loss)
+                # eval_results_arr.append(x_loss)
+
+                eval_results_arr.append(loss)
 
             import pickle
             pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
