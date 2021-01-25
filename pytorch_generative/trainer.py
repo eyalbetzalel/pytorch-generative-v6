@@ -136,7 +136,6 @@ class Trainer:
 
     def load_from_checkpoint(self):
         """Attempts to load Trainer state from the internal log_dir."""
-        import ipdb; ipdb.set_trace()
         self._model.load_state_dict(torch.load(self._path(self.hp_str + "_model_state")))
         self._optimizer.load_state_dict(torch.load(self._path(self.hp_str + "_optimizer_state")))
         if self._lr_scheduler is not None:
@@ -250,7 +249,6 @@ class Trainer:
         dir_path = self.hp_str
         for epoch in range(0,251,50):
             print(epoch)
-            import ipdb; ipdb.set_trace()
             self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
             self.load_from_checkpoint()
             self._model.eval()
