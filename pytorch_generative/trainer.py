@@ -249,7 +249,8 @@ class Trainer:
         dir_path = self.hp_str
         for epoch in range(0,251,50):
             print(epoch)
-            self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
+            # self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
+            self.hp_str = dir_path + "_epoch_" + str(epoch)
             self.load_from_checkpoint()
             self._model.eval()
             self._sample()
