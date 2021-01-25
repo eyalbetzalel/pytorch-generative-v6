@@ -223,24 +223,24 @@ class Trainer:
         ####################################################################################################################
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Sampling while training :
-        if self._epoch % self._sample_epochs == 0:
 
-            for i in range(10):
-                print("------------------ Sampling " + str(i) + " out of 10 (long) ------------------")
-                sample = self._model.sample(out_shape=[1024, 1])
-                sample = torch.reshape(sample, [32, 32])
-                sample = sample[None, :, :]
-                sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
-                sample = sample.permute(0, 3, 1, 2)
 
-                cwd = os.getcwd()
-                dir = self._log_dir + "/samples"
-                if not os.path.exists(dir):
-                    os.makedirs(dir)
+        for i in range(10000):
+            print("------------------ Sampling " + str(i) + " out of 10000 (long) ------------------")
+            sample = self._model.sample(out_shape=[1024, 1])
+            sample = torch.reshape(sample, [32, 32])
+            sample = sample[None, :, :]
+            sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
+            sample = sample.permute(0, 3, 1, 2)
 
-                f_name = dir + "/" + "sample_epoch_" + str(self._epoch) + "_image_" + str(i) + ".png"
-                plot_images_grid(sample, f_name)
-            self._summary_writer.add_images("sample", sample, self._step)
+            cwd = os.getcwd()
+            dir = self._log_dir + "/samples"
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+
+            f_name = self.hp_str + "/" +"sample_epoch_" + str(self._epoch) + "_image_" + str(i) + ".png"
+            plot_images_grid(sample, f_name)
+        # self._summary_writer.add_images("sample", sample, self._step)
         ####################################################################################################################
 
     def _eval_full_model(self):
@@ -254,27 +254,30 @@ class Trainer:
 
             self.load_from_checkpoint()
             self._model.eval()
-            total_examples, total_loss = 0, collections.defaultdict(int)
-
-            eval_results_arr = []
-
-            # run evaluation on test set :
-
-            for batch in self._eval_loader:
-
-                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                x, y = batch
-                x, y = x.to('cuda'), y.to('cuda')
-                n_examples = x.shape[0]
-                total_examples += n_examples
-                for key, loss in self._eval_one_batch(x, y).items():
-                    total_loss[key] += loss * n_examples
-
-                # sample = x.cpu().numpy()
-                # x_loss = (sample, loss)
-                # eval_results_arr.append(x_loss)
-
-                eval_results_arr.append(loss)
+            self._sample()
+            #
+            #
+            # total_examples, total_loss = 0, collections.defaultdict(int)
+            #
+            # eval_results_arr = []
+            #
+            # # run evaluation on test set :
+            #
+            # for batch in self._eval_loader:
+            #
+            #     batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+            #     x, y = batch
+            #     x, y = x.to('cuda'), y.to('cuda')
+            #     n_examples = x.shape[0]
+            #     total_examples += n_examples
+            #     for key, loss in self._eval_one_batch(x, y).items():
+            #         total_loss[key] += loss * n_examples
+            #
+            #     # sample = x.cpu().numpy()
+            #     # x_loss = (sample, loss)
+            #     # eval_results_arr.append(x_loss)
+            #
+            #     eval_results_arr.append(loss)
 
             # run evaluation on train set :
 
