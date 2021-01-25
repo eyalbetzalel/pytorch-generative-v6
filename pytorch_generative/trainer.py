@@ -136,7 +136,7 @@ class Trainer:
 
     def load_from_checkpoint(self):
         """Attempts to load Trainer state from the internal log_dir."""
-
+        import ipdb; ipdb.set_trace()
         self._model.load_state_dict(torch.load(self._path(self.hp_str + "_model_state")))
         self._optimizer.load_state_dict(torch.load(self._path(self.hp_str + "_optimizer_state")))
         if self._lr_scheduler is not None:
@@ -251,7 +251,6 @@ class Trainer:
         for epoch in range(0,251,50):
             print(epoch)
             self.hp_str = dir_path + "_epoch_" + str(epoch)
-
             self.load_from_checkpoint()
             self._model.eval()
             self._sample()
@@ -281,22 +280,22 @@ class Trainer:
 
             # run evaluation on train set :
 
-
-            for i, batch in enumerate(self._train_loader):
-
-                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                x, y = batch
-                x, y = x.to('cuda'), y.to('cuda')
-                n_examples = x.shape[0]
-                total_examples += n_examples
-                for key, loss in self._eval_one_batch(x, y).items():
-                    total_loss[key] += loss * n_examples
-
-                # sample = x.cpu().numpy()
-                # x_loss = (sample, loss)
-                # eval_results_arr.append(x_loss)
-
-                eval_results_arr.append(loss)
+            #
+            # for i, batch in enumerate(self._train_loader):
+            #
+            #     batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+            #     x, y = batch
+            #     x, y = x.to('cuda'), y.to('cuda')
+            #     n_examples = x.shape[0]
+            #     total_examples += n_examples
+            #     for key, loss in self._eval_one_batch(x, y).items():
+            #         total_loss[key] += loss * n_examples
+            #
+            #     # sample = x.cpu().numpy()
+            #     # x_loss = (sample, loss)
+            #     # eval_results_arr.append(x_loss)
+            #
+            #     eval_results_arr.append(loss)
 
             import pickle
             pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
