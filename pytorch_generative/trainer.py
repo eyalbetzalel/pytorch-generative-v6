@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import torch
 from torch.utils import tensorboard
 import numpy as np
+from tqdm import tqdm
 
 pathToCluster = r"/home/dsi/eyalbetzalel/image-gpt/downloads/kmeans_centers.npy"  # TODO : add path to cluster dir
 global clusters
@@ -224,8 +225,7 @@ class Trainer:
         # Sampling while training :
 
 
-        for i in range(3):
-            print("------------------ Sampling " + str(i) + " out of 10000 (long) ------------------")
+        for i in tqdm(range(10000)):
             sample = self._model.sample(out_shape=[1024, 1])
             sample = torch.reshape(sample, [32, 32])
             sample = sample[None, :, :]
@@ -248,7 +248,7 @@ class Trainer:
         # Load Model
         dir_path = self.hp_str
         for epoch in range(0,251,50):
-            print(epoch)
+            print("Sampling from epoch " + str(epoch))
             # self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
             self.hp_str = dir_path + "_epoch_" + str(epoch)
             self.load_from_checkpoint()
@@ -299,7 +299,6 @@ class Trainer:
 
             # import pickle
             # pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
-            print("-- Finish Evaluating Model --")
 
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
