@@ -297,8 +297,8 @@ class Trainer:
             #
             #     eval_results_arr.append(loss)
 
-            import pickle
-            pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
+            # import pickle
+            # pickle.dump(eval_results_arr, open(self._path(self.hp_str + "_eval.p"), "wb"))
             print("-- Finish Evaluating Model --")
 
     def interleaved_train_and_eval(self, n_epochs):
