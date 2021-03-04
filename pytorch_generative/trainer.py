@@ -224,8 +224,15 @@ class Trainer:
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EB~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # Sampling while training :
 
+        updateIndexFlag = 1
 
         for i in tqdm(range(10000)):
+
+            if (os.path.exists(dir) and updateIndexFlag):
+                i = len([name for name in os.listdir(dir) if os.path.isfile(os.path.join(dir, name))])
+                updateIndexFlag = 0
+                print("Current number of photos in dir is : " + str(i))
+
             sample = self._model.sample(out_shape=[1024, 1])
             sample = torch.reshape(sample, [32, 32])
             sample = sample[None, :, :]
