@@ -242,7 +242,7 @@ class Trainer:
                 if i == numOfPhotosToSample:
                     break
 
-            print("Photo number " + str(i))
+
             sample = self._model.sample(out_shape=[1024, 1])
             sample = torch.reshape(sample, [32, 32])
             sample = sample[None, :, :]
