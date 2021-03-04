@@ -228,6 +228,11 @@ class Trainer:
 
         for i in tqdm(range(10000)):
 
+            cwd = os.getcwd()
+            dir = self._path(self.hp_str)
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+
             if (os.path.exists(dir) and updateIndexFlag):
                 i = len([name for name in os.listdir(dir) if os.path.isfile(os.path.join(dir, name))])
                 updateIndexFlag = 0
@@ -238,11 +243,6 @@ class Trainer:
             sample = sample[None, :, :]
             sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
             sample = sample.permute(0, 3, 1, 2)
-
-            cwd = os.getcwd()
-            dir = self._path(self.hp_str)
-            if not os.path.exists(dir):
-                os.makedirs(dir)
 
             f_name = self._path(self.hp_str) + "/" + "sample_epoch_" + str(self._epoch) + "_image_" + str(i) + ".png"
             plot_images_grid(sample, f_name)
