@@ -226,7 +226,7 @@ class Trainer:
 
         updateIndexFlag = 1
         numOfPhotosToSample = 10000
-        for i in tqdm(range(numOfPhotosToSample)):
+        for i in range(numOfPhotosToSample):
 
             cwd = os.getcwd()
             dir = self._path(self.hp_str)
@@ -240,7 +240,7 @@ class Trainer:
                 if i == numOfPhotosToSample:
                     break
 
-
+            print("Photo number " + str(i))
             sample = self._model.sample(out_shape=[1024, 1])
             sample = torch.reshape(sample, [32, 32])
             sample = sample[None, :, :]
