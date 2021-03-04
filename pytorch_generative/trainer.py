@@ -226,7 +226,9 @@ class Trainer:
 
         updateIndexFlag = 1
         numOfPhotosToSample = 10000
-        for i in range(numOfPhotosToSample):
+        i = 0
+
+        while i < numOfPhotosToSample:
 
             cwd = os.getcwd()
             dir = self._path(self.hp_str)
@@ -249,6 +251,9 @@ class Trainer:
 
             f_name = self._path(self.hp_str) + "/" + "sample_epoch_" + str(self._epoch) + "_image_" + str(i) + ".png"
             plot_images_grid(sample, f_name)
+
+            i += 1
+
         # self._summary_writer.add_images("sample", sample, self._step)
         ####################################################################################################################
 
