@@ -225,8 +225,8 @@ class Trainer:
         # Sampling while training :
 
         updateIndexFlag = 1
-
-        for i in tqdm(range(10000)):
+        numOfPhotosToSample = 10000
+        for i in tqdm(range(numOfPhotosToSample)):
 
             cwd = os.getcwd()
             dir = self._path(self.hp_str)
@@ -237,6 +237,8 @@ class Trainer:
                 i = len([name for name in os.listdir(dir) if os.path.isfile(os.path.join(dir, name))])
                 updateIndexFlag = 0
                 print("Current number of photos in dir is : " + str(i))
+                if i == numOfPhotosToSample:
+                    break
 
             sample = self._model.sample(out_shape=[1024, 1])
             sample = torch.reshape(sample, [32, 32])
