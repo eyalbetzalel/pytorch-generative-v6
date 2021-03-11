@@ -262,7 +262,7 @@ class Trainer:
         # Evaluate full model:
         # Load Model
         dir_path = self.hp_str
-        for epoch in range(0,251,50):
+        for epoch in range(25,251,50):
             print("Sampling from epoch " + str(epoch))
             # self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
             self.hp_str = dir_path + "_epoch_" + str(epoch)
