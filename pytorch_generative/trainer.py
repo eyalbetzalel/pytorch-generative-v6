@@ -114,7 +114,7 @@ class Trainer:
 
     def _save_checkpoint(self):
 
-        if self._epoch % self._save_checkpoint_epochs != 0:
+        if self._epoch % self._save_checkpoint_epochs != 25:
             return
 
         hp_str = self.hp_str + "_epoch_" + str(self._epoch) + "_"
