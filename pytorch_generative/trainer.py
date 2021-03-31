@@ -225,7 +225,7 @@ class Trainer:
         # Sampling while training :
 
         updateIndexFlag = 1
-        numOfPhotosToSample = 10000
+        numOfPhotosToSample = 5
         i = 0
 
         while i < numOfPhotosToSample:

@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e7740515-9cd4-4280-a3e4-4d93ccda6f9a" name="Default Changelist" comment="Add mapping function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytorch_generative/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,13 +46,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608289969797</updated>
-    </task>
-    <task id="LOCAL-00226" summary="sampling">
-      <created>1609585873531</created>
-      <option name="number" value="00226" />
-      <option name="presentableId" value="LOCAL-00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1609585873531</updated>
     </task>
     <task id="LOCAL-00227" summary="sampling">
       <created>1609585909310</created>
@@ -388,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617196217528</updated>
     </task>
-    <option name="localTasksCounter" value="275" />
+    <task id="LOCAL-00275" summary="Eval">
+      <created>1617221949412</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1617221949413</updated>
+    </task>
+    <option name="localTasksCounter" value="276" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
