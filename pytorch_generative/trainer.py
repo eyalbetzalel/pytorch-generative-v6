@@ -31,8 +31,8 @@ class Trainer:
         optimizer,
         train_loader,
         eval_loader,
-        save_checkpoint_epochs=50,
-        sample_epochs=50,
+        save_checkpoint_epochs=5,
+        sample_epochs=5,
         sample_fn=None,
         lr_scheduler=None,
         log_dir=None,
@@ -114,7 +114,7 @@ class Trainer:
 
     def _save_checkpoint(self):
 
-        if self._epoch % self._save_checkpoint_epochs != 25:
+        if self._epoch % self._save_checkpoint_epochs != 0:
             return
 
         hp_str = self.hp_str + "_epoch_" + str(self._epoch) + "_"
