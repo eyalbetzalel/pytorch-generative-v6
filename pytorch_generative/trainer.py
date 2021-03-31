@@ -266,7 +266,7 @@ class Trainer:
 
             ####### Sampling ######
 
-            # print("Sampling from epoch " + str(epoch))
+            print("Eval epoch " + str(epoch))
             # self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
             self.hp_str = dir_path + "_epoch_" + str(epoch)
             self.load_from_checkpoint()
