@@ -361,8 +361,8 @@ class Trainer:
 
                 # Sample / Save cp:
                 self._save_checkpoint()
-                # if self._epoch % self._sample_epochs == 0:
-                #     self._sample()
+                if self._epoch % self._sample_epochs == 0:
+                    self._sample()
                 self._epoch += 1
 
             self._summary_writer.close()
