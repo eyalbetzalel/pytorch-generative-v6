@@ -26,6 +26,14 @@ def load_h5_dataset(directory):
     precent_train_test_split = 0.7
     train = data_flat[:int(np.floor(precent_train_test_split * data_flat.shape[0])), :]
     test = data_flat[int(np.floor(precent_train_test_split * data_flat.shape[0])) + 1:, :]
+
+    if not os.path.isfile('test_imagegpt.h5'):
+        print("Saving H5DF files...")
+        test_h5 = h5py.File('test_imagegpt.h5', 'w')
+        test_h5.create_dataset('test', data=test)
+        train_h5 = h5py.File('train_imagegpt.h5', 'w')
+        train_h5.create_dataset('train', data=train)
+
     print(" --------------------------------- ")
     print("Finish loading Datasat from H5DF files...")
 

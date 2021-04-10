@@ -30,8 +30,8 @@ class Trainer:
         optimizer,
         train_loader,
         eval_loader,
-        save_checkpoint_epochs=50,
-        sample_epochs=50,
+        save_checkpoint_epochs=5,
+        sample_epochs=5,
         sample_fn=None,
         lr_scheduler=None,
         log_dir=None,
@@ -247,7 +247,7 @@ class Trainer:
         # Evaluate full model:
         # Load Model
         dir_path = self.hp_str
-        for epoch in range(0,251,50):
+        for epoch in range(0,101,5):
             print(epoch)
             # self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
             self.hp_str = dir_path + "_epoch_" + str(epoch)
