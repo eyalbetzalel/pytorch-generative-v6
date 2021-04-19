@@ -224,7 +224,7 @@ class Trainer:
         # Sampling while training :
 
 
-        for i in range(10000):
+        for i in range(1):
             print("------------------ Sampling " + str(i) + " out of 10000 (long) ------------------")
             sample = self._model.sample(out_shape=[1024, 1])
             sample = torch.reshape(sample, [32, 32])
