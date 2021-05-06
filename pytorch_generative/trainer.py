@@ -306,7 +306,7 @@ class Trainer:
         #     print("-- Finish Evaluating Model --")
 
         if self.sampling_part == 1:
-            print("Sampling from part : " + str(sampling_part))
+            print("Sampling from part : " + str(self.sampling_part))
             for epoch in range(0,16,5):
                 print("sampling From Epoch:" + str(epoch))
                 self.hp_str = dir_path + "_epoch_" + str(epoch)
@@ -315,7 +315,7 @@ class Trainer:
                 self._sample()
 
         if self.sampling_part == 2:
-            print("Sampling from part : " + str(sampling_part))
+            print("Sampling from part : " + str(self.sampling_part))
             for epoch in range(20, 31, 5):
                 print("sampling From Epoch:" + str(epoch))
                 self.hp_str = dir_path + "_epoch_" + str(epoch)
