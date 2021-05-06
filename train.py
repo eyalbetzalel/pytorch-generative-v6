@@ -46,7 +46,8 @@ def main(args):
 
             # Evaluation Flag:
             args.eval,
-            args.eval_dir
+            args.eval_dir,
+            args.sampling_part
         )
 
 
@@ -141,6 +142,13 @@ if __name__ == "__main__":
         "--eval",
         help="Evaluation mode",
         action="store_true"
+    )
+
+    parser.add_argument(
+        "--sampling_part",
+        type=int,
+        help="start sampling from epoch 0 (1) or 20 (2)",
+        default=1
     )
 
     args = parser.parse_args()

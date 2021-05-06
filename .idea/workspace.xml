@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cf260af6-eee8-47ff-a5f1-d9d70fbf2be3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/models/pixel_snail.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytorch_generative/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytorch_generative/trainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,60 +41,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e7740515-9cd4-4280-a3e4-4d93ccda6f9a" name="Default Changelist" comment="" />
+      <changelist id="cf260af6-eee8-47ff-a5f1-d9d70fbf2be3" name="Default Changelist" comment="" />
       <created>1608289969797</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608289969797</updated>
-    </task>
-    <task id="LOCAL-00212" summary="sampling">
-      <created>1609512746589</created>
-      <option name="number" value="00212" />
-      <option name="presentableId" value="LOCAL-00212" />
-      <option name="project" value="LOCAL" />
-      <updated>1609512746589</updated>
-    </task>
-    <task id="LOCAL-00213" summary="sampling">
-      <created>1609513036297</created>
-      <option name="number" value="00213" />
-      <option name="presentableId" value="LOCAL-00213" />
-      <option name="project" value="LOCAL" />
-      <updated>1609513036297</updated>
-    </task>
-    <task id="LOCAL-00214" summary="sampling">
-      <created>1609513294847</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1609513294847</updated>
-    </task>
-    <task id="LOCAL-00215" summary="sampling">
-      <created>1609513926986</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1609513926986</updated>
-    </task>
-    <task id="LOCAL-00216" summary="sampling">
-      <created>1609514035740</created>
-      <option name="number" value="00216" />
-      <option name="presentableId" value="LOCAL-00216" />
-      <option name="project" value="LOCAL" />
-      <updated>1609514035740</updated>
-    </task>
-    <task id="LOCAL-00217" summary="sampling">
-      <created>1609516657239</created>
-      <option name="number" value="00217" />
-      <option name="presentableId" value="LOCAL-00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1609516657239</updated>
-    </task>
-    <task id="LOCAL-00218" summary="sampling">
-      <created>1609517252381</created>
-      <option name="number" value="00218" />
-      <option name="presentableId" value="LOCAL-00218" />
-      <option name="project" value="LOCAL" />
-      <updated>1609517252381</updated>
     </task>
     <task id="LOCAL-00219" summary="sampling">
       <created>1609517275834</created>
@@ -387,7 +341,56 @@
       <option name="project" value="LOCAL" />
       <updated>1609965556227</updated>
     </task>
-    <option name="localTasksCounter" value="261" />
+    <task id="LOCAL-00261" summary="train new">
+      <created>1618087615576</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1618087615576</updated>
+    </task>
+    <task id="LOCAL-00262" summary="train new">
+      <created>1618087823521</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1618087823521</updated>
+    </task>
+    <task id="LOCAL-00263" summary="xcvcv">
+      <created>1618865355456</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1618865355457</updated>
+    </task>
+    <task id="LOCAL-00264" summary="xcvcv">
+      <created>1619385254745</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1619385254745</updated>
+    </task>
+    <task id="LOCAL-00265" summary="Evaluation --&gt; Sample">
+      <created>1619816638792</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1619816638793</updated>
+    </task>
+    <task id="LOCAL-00266" summary="Evaluation --&gt; Sample">
+      <created>1620300264099</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1620300264099</updated>
+    </task>
+    <task id="LOCAL-00267" summary="Evaluation --&gt; Sample">
+      <created>1620300343630</created>
+      <option name="number" value="00267" />
+      <option name="presentableId" value="LOCAL-00267" />
+      <option name="project" value="LOCAL" />
+      <updated>1620300343630</updated>
+    </task>
+    <option name="localTasksCounter" value="268" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -407,7 +410,10 @@
     <MESSAGE value="Load data from ImageGPT - PixelSnail" />
     <MESSAGE value="Add mapping function" />
     <MESSAGE value="sampling" />
-    <option name="LAST_COMMIT_MESSAGE" value="sampling" />
+    <MESSAGE value="train new" />
+    <MESSAGE value="xcvcv" />
+    <MESSAGE value="Evaluation --&gt; Sample" />
+    <option name="LAST_COMMIT_MESSAGE" value="Evaluation --&gt; Sample" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -429,7 +435,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pytorch_generative/trainer.py</url>
-          <line>208</line>
+          <line>209</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>

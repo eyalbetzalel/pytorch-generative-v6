@@ -44,6 +44,7 @@ class Trainer:
         attention_key_channels=2,
         evalFlag=False,
         evaldir=None,
+        sampling_part=1
     ):
         """Initializes a new Trainer instance.
 
@@ -225,85 +226,101 @@ class Trainer:
 
 
         for i in range(10000):
-            print("------------------ Sampling " + str(i) + " out of 10000 (long) ------------------")
-            sample = self._model.sample(out_shape=[1024, 1])
-            sample = torch.reshape(sample, [32, 32])
-            sample = sample[None, :, :]
-            sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
-            sample = sample.permute(0, 3, 1, 2)
-
-            cwd = os.getcwd()
-            dir = self._path(self.hp_str)
-            if not os.path.exists(dir):
-                os.makedirs(dir)
 
             f_name = self._path(self.hp_str) + "/" + "sample_epoch_" + str(self._epoch) + "_image_" + str(i) + ".png"
-            plot_images_grid(sample, f_name)
-        # self._summary_writer.add_images("sample", sample, self._step)
-        ####################################################################################################################
+
+            if os.path.isfile(f_name):
+                continue
+
+            else:
+                print("------------------ Sampling " + str(i) + " out of 10000 (long) ------------------")
+                sample = self._model.sample(out_shape=[1024, 1])
+                sample = torch.reshape(sample, [32, 32])
+                sample = sample[None, :, :]
+                sample = torch.round(127.5 * (clusters[sample.long()] + 1.0))
+                sample = sample.permute(0, 3, 1, 2)
+
+                cwd = os.getcwd()
+                dir = self._path(self.hp_str)
+                if not os.path.exists(dir):
+                    os.makedirs(dir)
+
+
+                plot_images_grid(sample, f_name)
+            ####################################################################################################################
 
     def _eval_full_model(self):
 
         # Evaluate full model:
         # Load Model
         dir_path = self.hp_str
+        #
+        # for epoch in range(0, 51, 5):
+        #
+        #     total_examples, total_loss = 0, collections.defaultdict(int)
+        #
+        #     eval_results_arr_train = []
+        #     eval_results_arr_test = []
+        #
+        #     # run evaluation on test set :
+        #
+        #     for batch in self._eval_loader:
+        #
+        #         batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+        #         x, y = batch
+        #         x, y = x.to('cuda'), y.to('cuda')
+        #         n_examples = x.shape[0]
+        #         total_examples += n_examples
+        #         for key, loss in self._eval_one_batch(x, y).items():
+        #             total_loss[key] += loss * n_examples
+        #
+        #         # sample = x.cpu().numpy()
+        #         # x_loss = (sample, loss)
+        #         # eval_results_arr.append(x_loss)
+        #
+        #         eval_results_arr_test.append(loss)
+        #
+        #     # run evaluation on train set :
+        #
+        #
+        #     for i, batch in enumerate(self._train_loader):
+        #
+        #         batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
+        #         x, y = batch
+        #         x, y = x.to('cuda'), y.to('cuda')
+        #         n_examples = x.shape[0]
+        #         total_examples += n_examples
+        #         for key, loss in self._eval_one_batch(x, y).items():
+        #             total_loss[key] += loss * n_examples
+        #
+        #         # sample = x.cpu().numpy()
+        #         # x_loss = (sample, loss)
+        #         # eval_results_arr.append(x_loss)
+        #
+        #         eval_results_arr_train.append(loss)
+        #
+        #     import pickle
+        #     pickle.dump(eval_results_arr_train, open(self._path(self.hp_str + "_train_eval.p"), "wb"))
+        #     pickle.dump(eval_results_arr_test, open(self._path(self.hp_str + "_test_eval.p"), "wb"))
+        #     print("-- Finish Evaluating Model --")
 
-        for epoch in range(0, 51, 5):
+        if sampling_part == 1:
+            print("Sampling from part : " + str(sampling_part))
+            for epoch in range(0,16,5):
+                print("sampling From Epoch:" + str(epoch))
+                self.hp_str = dir_path + "_epoch_" + str(epoch)
+                self.load_from_checkpoint()
+                self._model.eval()
+                self._sample()
 
-            total_examples, total_loss = 0, collections.defaultdict(int)
-
-            eval_results_arr_train = []
-            eval_results_arr_test = []
-
-            # run evaluation on test set :
-
-            for batch in self._eval_loader:
-
-                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                x, y = batch
-                x, y = x.to('cuda'), y.to('cuda')
-                n_examples = x.shape[0]
-                total_examples += n_examples
-                for key, loss in self._eval_one_batch(x, y).items():
-                    total_loss[key] += loss * n_examples
-
-                # sample = x.cpu().numpy()
-                # x_loss = (sample, loss)
-                # eval_results_arr.append(x_loss)
-
-                eval_results_arr_test.append(loss)
-
-            # run evaluation on train set :
-
-
-            for i, batch in enumerate(self._train_loader):
-
-                batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
-                x, y = batch
-                x, y = x.to('cuda'), y.to('cuda')
-                n_examples = x.shape[0]
-                total_examples += n_examples
-                for key, loss in self._eval_one_batch(x, y).items():
-                    total_loss[key] += loss * n_examples
-
-                # sample = x.cpu().numpy()
-                # x_loss = (sample, loss)
-                # eval_results_arr.append(x_loss)
-
-                eval_results_arr_train.append(loss)
-
-            import pickle
-            pickle.dump(eval_results_arr_train, open(self._path(self.hp_str + "_train_eval.p"), "wb"))
-            pickle.dump(eval_results_arr_test, open(self._path(self.hp_str + "_test_eval.p"), "wb"))
-            print("-- Finish Evaluating Model --")
-
-        for epoch in range(0,51,5):
-            print("sampling From Epoch:" + str(epoch))
-            # self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
-            self.hp_str = dir_path + "_epoch_" + str(epoch)
-            self.load_from_checkpoint()
-            self._model.eval()
-            self._sample()
+        if sampling_part == 2:
+            print("Sampling from part : " + str(sampling_part))
+            for epoch in range(20, 31, 5):
+                print("sampling From Epoch:" + str(epoch))
+                self.hp_str = dir_path + "_epoch_" + str(epoch)
+                self.load_from_checkpoint()
+                self._model.eval()
+                self._sample()
 
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
