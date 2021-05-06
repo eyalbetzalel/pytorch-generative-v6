@@ -108,6 +108,7 @@ class Trainer:
         self._summary_writer = tensorboard.SummaryWriter(self._log_dir, max_queue=100)
         self.evalFlag = evalFlag
         self.evaldir = evaldir
+        self.sampling_part = sampling_part
 
     def _path(self, file_name):
         return os.path.join(self._log_dir, file_name)
@@ -304,7 +305,7 @@ class Trainer:
         #     pickle.dump(eval_results_arr_test, open(self._path(self.hp_str + "_test_eval.p"), "wb"))
         #     print("-- Finish Evaluating Model --")
 
-        if sampling_part == 1:
+        if self.sampling_part == 1:
             print("Sampling from part : " + str(sampling_part))
             for epoch in range(0,16,5):
                 print("sampling From Epoch:" + str(epoch))
@@ -313,7 +314,7 @@ class Trainer:
                 self._model.eval()
                 self._sample()
 
-        if sampling_part == 2:
+        if self.sampling_part == 2:
             print("Sampling from part : " + str(sampling_part))
             for epoch in range(20, 31, 5):
                 print("sampling From Epoch:" + str(epoch))
