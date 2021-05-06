@@ -298,7 +298,7 @@ class Trainer:
             print("-- Finish Evaluating Model --")
 
         for epoch in range(0,51,5):
-            print(epoch)
+            print("sampling From Epoch:" + str(epoch))
             # self.hp_str = dir_path + "/" + dir_path + "_epoch_" + str(epoch)
             self.hp_str = dir_path + "_epoch_" + str(epoch)
             self.load_from_checkpoint()
