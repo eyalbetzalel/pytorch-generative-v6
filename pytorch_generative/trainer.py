@@ -305,23 +305,34 @@ class Trainer:
         #     pickle.dump(eval_results_arr_test, open(self._path(self.hp_str + "_test_eval.p"), "wb"))
         #     print("-- Finish Evaluating Model --")
 
-        if self.sampling_part == 1:
-            print("Sampling from part : " + str(self.sampling_part))
-            for epoch in range(0,16,5):
-                print("sampling From Epoch:" + str(epoch))
-                self.hp_str = dir_path + "_epoch_" + str(epoch)
-                self.load_from_checkpoint()
-                self._model.eval()
-                self._sample()
+        # if self.sampling_part == 1:
+        #     print("Sampling from part : " + str(self.sampling_part))
+        #     for epoch in range(0,16,5):
+        #         print("sampling From Epoch:" + str(epoch))
+        #         self.hp_str = dir_path + "_epoch_" + str(epoch)
+        #         self.load_from_checkpoint()
+        #         self._model.eval()
+        #         self._sample()
+        #
+        # if self.sampling_part == 2:
+        #     print("Sampling from part : " + str(self.sampling_part))
+        #     for epoch in range(20, 31, 5):
+        #         print("sampling From Epoch:" + str(epoch))
+        #         self.hp_str = dir_path + "_epoch_" + str(epoch)
+        #         self.load_from_checkpoint()
+        #         self._model.eval()
+        #         self._sample()
 
-        if self.sampling_part == 2:
-            print("Sampling from part : " + str(self.sampling_part))
-            for epoch in range(20, 31, 5):
-                print("sampling From Epoch:" + str(epoch))
-                self.hp_str = dir_path + "_epoch_" + str(epoch)
-                self.load_from_checkpoint()
-                self._model.eval()
-                self._sample()
+        epoch_to_sample = self.sampling_part
+
+        print("Sampling from part : " + str(epoch_to_sample))
+
+        for epoch in epoch_to_sample:
+            print("sampling From Epoch:" + str(epoch))
+            self.hp_str = dir_path + "_epoch_" + str(epoch)
+            self.load_from_checkpoint()
+            self._model.eval()
+            self._sample()
 
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
