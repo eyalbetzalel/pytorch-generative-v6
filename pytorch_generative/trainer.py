@@ -325,14 +325,11 @@ class Trainer:
 
         epoch_to_sample = self.sampling_part
 
-        print("Sampling from part : " + str(epoch_to_sample))
-
-        for epoch in epoch_to_sample:
-            print("sampling From Epoch:" + str(epoch))
-            self.hp_str = dir_path + "_epoch_" + str(epoch)
-            self.load_from_checkpoint()
-            self._model.eval()
-            self._sample()
+        print("sampling From Epoch:" + str(epoch_to_sample))
+        self.hp_str = dir_path + "_epoch_" + str(epoch_to_sample)
+        self.load_from_checkpoint()
+        self._model.eval()
+        self._sample()
 
     def interleaved_train_and_eval(self, n_epochs):
         """Trains and evaluates (after each epoch) for n_epochs."""
